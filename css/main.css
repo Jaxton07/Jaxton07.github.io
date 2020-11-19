@@ -322,7 +322,7 @@ img[srcset] {
   --post-text-color: #2c3e50;
   --post-heading-color: #1a202c;
   --post-link-color: #0366d6;
-  --link-hover-color: #30a9de;
+  --link-hover-color: #1abc9c;
   --link-hover-bg-color: #f8f9fa;
   --navbar-bg-color: #2f4154;
   --navbar-text-color: #fff;
@@ -874,7 +874,7 @@ img[srcset] {
   overflow: visible;
 }
 .markdown-body pre code {
-  font-size: 85%;
+  font-size: 120%;
   display: block;
   overflow-x: auto;
   padding: 0.5rem 0;
