@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>云服务器Ubuntu18.04安装jdk</title>
+    <link href="/2020/11/18/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8Ubuntu18.04%E5%AE%89%E8%A3%85jdk/"/>
+    <url>/2020/11/18/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8Ubuntu18.04%E5%AE%89%E8%A3%85jdk/</url>
+    
+    <content type="html"><![CDATA[<h1 id="云服务器Ubuntu18-04安装jdk"><a href="#云服务器Ubuntu18-04安装jdk" class="headerlink" title="云服务器Ubuntu18.04安装jdk"></a>云服务器Ubuntu18.04安装jdk</h1><p>linux安装java jdk有几种方式，这里讲下我用的方式。就是下载好jdk压缩包，然后解压包再添加好环境变量。</p><h3 id="1、下载压缩包"><a href="#1、下载压缩包" class="headerlink" title="1、下载压缩包"></a>1、下载压缩包</h3><p><a href="https://www.injdk.cn/">https://www.injdk.cn/</a></p><p>这个网址有java jdk 的oracle版和各个openjdk发行版。因为之前刚在windows 的子系统WSL Ubuntu18.04 上安装了jdk,所以我直接把之前下载到windows电脑上的文件上传到了服务器。</p><p>我在 user(自己的用户名)目录下新建了 jdk 文件夹。</p><pre><code class="hljs shell">mkdir jdk</code></pre><p>然后把文件放到 jdk 目录下</p><p><img src="https://gitee.com/ericw5200/image/raw/master/img/image-20201118171805737.png" alt="image-20201118171805737"></p><h3 id="2、然后解压文件"><a href="#2、然后解压文件" class="headerlink" title="2、然后解压文件"></a>2、然后解压文件</h3><pre><code class="hljs shell">tar -xzfv zulu8.48.0.53-ca-jdk8.0.265-linux_x64.tar.gz -C /home/ericw/jdk</code></pre><p>更改解压出来的文件夹名：</p><pre><code class="hljs shell">mv zulu8.48.0.53-ca-jdk8.0.265-linux_x64/ jdk8.0.265</code></pre><h3 id="3、配置环境变量"><a href="#3、配置环境变量" class="headerlink" title="3、配置环境变量"></a>3、配置环境变量</h3><p>打开文件:</p><pre><code class="hljs shell">sudo vim ~/.bashrc</code></pre><p>在最后添加：</p><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">配置环境变量</span>export JAVA_HOME=/home/ericw/jdk/jdk8.0.265  ## 这里要注意目录要换成自己解压的jdk 目录export JRE_HOME=$&#123;JAVA_HOME&#125;/jre  export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib  export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</code></pre><p>然后保存退出：</p><pre><code class="hljs shell">:wq</code></pre><p>更新配置文件：</p><pre><code class="hljs shell">source ~/.bashrc</code></pre><p>全部完成，可以查看版本信息验证一下：</p><p><img src="https://gitee.com/ericw5200/image/raw/master/img/jdk%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90.png" alt="jdk安装完成"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>小知识点</tag>
+      
+      <tag>java</tag>
+      
+      <tag>云服务器</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Java多态经典题</title>
+    <link href="/2020/11/16/java%E5%A4%9A%E6%80%81%E7%BB%8F%E5%85%B8%E9%A2%98/"/>
+    <url>/2020/11/16/java%E5%A4%9A%E6%80%81%E7%BB%8F%E5%85%B8%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Java多态经典题"><a href="#Java多态经典题" class="headerlink" title="Java多态经典题"></a>Java多态经典题</h1><p>​        之前看过几次多态的题，当时感觉搞清楚了，但是过一段时间感觉又模糊不确定了，所以记录一下，而且后来在项目中有涉及相关的内容，应该会有更深的体会。</p><p><strong>题目：</strong></p><pre><code class="hljs java"><span class="hljs-keyword">package</span> test.经典多态案例;<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestDuoTai</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;        A a1 = <span class="hljs-keyword">new</span> A();        A a2 = <span class="hljs-keyword">new</span> B();        B b = <span class="hljs-keyword">new</span> B();        C c = <span class="hljs-keyword">new</span> C();        D d = <span class="hljs-keyword">new</span> D();        System.out.println(<span class="hljs-string">&quot;1--&quot;</span> + a1.show(b) + <span class="hljs-string">&quot;  &quot;</span> + System.identityHashCode(a1));        <span class="hljs-comment">// 为什么会向上找</span>        System.out.println(<span class="hljs-string">&quot;2--&quot;</span> + a1.show(c));        System.out.println(<span class="hljs-string">&quot;3--&quot;</span> + a1.show(d));        System.out.println(<span class="hljs-string">&quot;4--&quot;</span> + a2.show(b) + <span class="hljs-string">&quot;  &quot;</span> + System.identityHashCode(a2));        <span class="hljs-comment">/**(想法1.0)</span><span class="hljs-comment">         多态情况下，a2为A类型的引用，指向B类对象，</span><span class="hljs-comment">         先在B类里找有无该方法，有。但是父类A中没有，于是不能直接用B类的该方法，按照前三个的逻辑先去A类中找，A类中有show(A obj)，但是A的子类B类中重写了show(A obj)，所以调用B类的该方法</span><span class="hljs-comment">         */</span>        <span class="hljs-comment">/**(想法2.0)</span><span class="hljs-comment">         *多态情况下，a2为A类型的引用，指向B类对象，在A类中找有无该方法，没有，但是A类为B类父类，所以调 *用A类的show(A obj)方法，然后A类的子类B重写了show(A obj)方法，</span><span class="hljs-comment">         * 所以最终调用B类的show(A obj)方法</span><span class="hljs-comment">         * */</span>        <span class="hljs-comment">// 只有方法才有多态性！！！</span>        System.out.println(<span class="hljs-string">&quot;5--&quot;</span> + a2.show(c));        System.out.println(<span class="hljs-string">&quot;6--&quot;</span> + a2.show(d));        System.out.println(<span class="hljs-string">&quot;7--&quot;</span> + b.show(b));        System.out.println(<span class="hljs-string">&quot;8--&quot;</span> + b.show(c));                <span class="hljs-comment">// 这里因为B类继承A类，而A类有该方法，且没被B重写，所以B类中隐含有该方法。</span>        System.out.println(<span class="hljs-string">&quot;9--&quot;</span> + b.show(d));      &#125;&#125;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">show</span><span class="hljs-params">(D obj)</span> </span>&#123;        <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;A and D&quot;</span>);    &#125;    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">show</span><span class="hljs-params">(A obj)</span> </span>&#123;        <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;A and A&quot;</span>);    &#125;&#125;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">A</span> </span>&#123;    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> num1 = <span class="hljs-number">10</span>;    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">show</span><span class="hljs-params">(B obj)</span> </span>&#123;        <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;B and B&quot;</span>);    &#125;    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">show</span><span class="hljs-params">(A obj)</span> </span>&#123;        <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;B and A&quot;</span>);    &#125;    <span class="hljs-comment">/*  子类B中包含了父类A的这两个方法，只是B类重写覆盖了show(A obj)</span><span class="hljs-comment">    public String show(D obj) &#123;</span><span class="hljs-comment">        return (&quot;A and D&quot;);</span><span class="hljs-comment">    &#125;</span><span class="hljs-comment"></span><span class="hljs-comment">    public String show(A obj) &#123;</span><span class="hljs-comment">        return (&quot;A and A&quot;);</span><span class="hljs-comment">    &#125;</span><span class="hljs-comment">     */</span>&#125;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">B</span> </span>&#123;&#125;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">D</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">B</span> </span>&#123;&#125;</code></pre><p><strong>注意：</strong>对于a2的情况，也就是父类引用指向子类对象的，a2是无法调用A类中没有而B类中有的方法的。也就是对于子类独有的方法，这个父类引用是无法调用的。</p><p>运行结果：</p><blockquote><p>1–A and A  460141958<br>2–A and A<br>3–A and D<br>4–B and A  1163157884<br>5–B and A<br>6–A and D<br>7–B and B<br>8–B and B<br>9–A and D</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java基础</tag>
+      
+      <tag>小知识点</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Win10子系统迁移安装目录到非系统盘</title>
+    <link href="/2020/11/13/win10%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E5%88%B0%E9%9D%9E%E7%B3%BB%E7%BB%9F%E7%9B%98/"/>
+    <url>/2020/11/13/win10%E5%AD%90%E7%B3%BB%E7%BB%9F%E8%BF%81%E7%A7%BB%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E5%88%B0%E9%9D%9E%E7%B3%BB%E7%BB%9F%E7%9B%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Win10子系统迁移安装目录到非系统盘"><a href="#Win10子系统迁移安装目录到非系统盘" class="headerlink" title="Win10子系统迁移安装目录到非系统盘"></a>Win10子系统迁移安装目录到非系统盘</h1><p>​        因为电脑C盘吃紧，但是win10默认从Microsoft安装的软件都是在C盘的，安装完wsl之后，还要更新软件安装新软件之类的，这又要占用C盘空间，于是想把WSL的安装位置迁移到非系统盘。</p><p>​        之前其实就做过一次，这次在另一台电脑上弄的时候，发现操作好像和之前不一样，网上的都是要下一个 LxRunOffline.exe 的软件来辅助转移。有点疑惑，不知道两个的目的是不是一样，或者两个的操作是不是一个意思，主要是一开始用LxRunOffline.exe迁移失败了，最后wsl拒绝访问。然后重新装了WSL，用第一次的方法操作成功。所以不是太清楚这两个具体有哪些区别，但是目的达到了，因为迁移之后WSL安装的软件就没有安装在C盘了。</p><h3 id="1、查看WSL分发版本"><a href="#1、查看WSL分发版本" class="headerlink" title="1、查看WSL分发版本"></a>1、查看WSL分发版本</h3><p>用管理员权限打开 Windows PowerShell ，输入命令：</p><pre><code class="hljs shell">wsl -l --all -v</code></pre><p>显示如下：</p><pre><code class="hljs shell">NAMESTATEVERSIONUbuntu18.04 Runing 2</code></pre><h3 id="2、导出分发版为tar文件到D盘"><a href="#2、导出分发版为tar文件到D盘" class="headerlink" title="2、导出分发版为tar文件到D盘"></a>2、导出分发版为<strong>tar</strong>文件到D盘</h3><pre><code class="hljs shell">wsl --export Ubuntu-18.04 d:\wsl-ubuntu18.04.tar   #看清楚版本</code></pre><h3 id="3、注销当前分发版"><a href="#3、注销当前分发版" class="headerlink" title="3、注销当前分发版"></a>3、注销当前分发版</h3><pre><code class="hljs shell">wsl --unregister Ubuntu-18.04</code></pre><h3 id="4、重新导入并安装WSL到新的目录下"><a href="#4、重新导入并安装WSL到新的目录下" class="headerlink" title="4、重新导入并安装WSL到新的目录下"></a>4、重新导入并安装WSL到新的目录下</h3><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 前面是新目录路径，后面是导出的tar文件的路径</span>wsl --import Ubuntu-18.04 d:\wsl-ubuntu18.04 d:\wsl-ubuntu18.04.tar --version 2</code></pre><h3 id="5、设置默认登陆用户为安装时用户名"><a href="#5、设置默认登陆用户为安装时用户名" class="headerlink" title="5、设置默认登陆用户为安装时用户名"></a>5、设置默认登陆用户为安装时用户名</h3><pre><code class="hljs shell">ubuntu1804 config --default-user Username#注意前面的版本号，最后Username写自己的用户名</code></pre><h3 id="6、删除tar文件（可选）"><a href="#6、删除tar文件（可选）" class="headerlink" title="6、删除tar文件（可选）"></a>6、删除tar文件（可选）</h3><pre><code class="hljs shell">del d:\wsl-ubuntu18.04.tar</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术干货</tag>
+      
+      <tag>小知识点</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Ubuntu 18.04 添加新用户</title>
+    <link href="/2020/11/12/Ubuntu18.04%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%94%A8%E6%88%B7/"/>
+    <url>/2020/11/12/Ubuntu18.04%E6%B7%BB%E5%8A%A0%E6%96%B0%E7%94%A8%E6%88%B7/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Ubuntu-18-04-添加新用户"><a href="#Ubuntu-18-04-添加新用户" class="headerlink" title="Ubuntu 18.04 添加新用户"></a>Ubuntu 18.04 添加新用户</h1><p>太久没用Linux,每次这些基本的命令都要重新百度找，这里做个记录，方便以后查找。</p><h2 id="1、创建用户"><a href="#1、创建用户" class="headerlink" title="1、创建用户"></a>1、创建用户</h2><p><strong>命令：</strong></p><p>adduer和useradd，对应着两条删除用户的命令：deluser和userdel</p><p>两者的区别：</p><p><strong>adduser:</strong> 会自动为创建的用户指定 <strong>主目录</strong>、<strong>系统shell版本</strong>，而且会在创建时输入<strong>用户密码</strong>。</p><p><strong>useradd:</strong> 需要使用参数手动指定上述的基本设置，如果不使用任何参数，则创建的用户没有密码、主目录，并且没有指定shell版本。</p><h3 id="1-1-adduser"><a href="#1-1-adduser" class="headerlink" title="1.1 adduser"></a>1.1 adduser</h3><p>输入命令：</p><pre><code class="hljs shell">sudo adduser tt</code></pre><p>输出显示：</p><pre><code class="hljs shell">[sudo] password for mqk: 正在添加用户&quot;tt&quot;...正在添加新组&quot;tt&quot; (1006)...正在添加新用户&quot;tt&quot; (1006) 到组&quot;tt&quot;...创建主目录&quot;/home/tt&quot;...正在从&quot;/etc/skel&quot;复制文件...输入新的 UNIX 密码： 重新输入新的 UNIX 密码： passwd：已成功更新密码正在改变 tt 的用户信息请输入新值，或直接敲回车键以使用默认值    全名 []:     房间号码 []:     工作电话 []:     家庭电话 []:     其它 []: 这些信息是否正确？ [Y/n] y</code></pre><p>这样在创建用户名时，就创建了用户的主目录以及密码。</p><p>默认情况下：<br>adduser在创建用户时会主动调用 /etc/adduser.conf；<br>在创建用户主目录时默认在/home下，而且创建为 /home/用户名</p><p>如果主目录已经存在，就不再创建，但是此主目录虽然作为新用户的主目录，而且默认登录时会进入这个目录下，但是这个目录并不是属于新用户，当使用userdel删除新用户时，并不会删除这个主目录，因为这个主目录在创建前已经存在且并不属于这个用户。</p><p>为用户指定shell版本为：/bin/bash<br>因此常用参数选项为：</p><ol><li>–home： 指定创建主目录的路径，默认是在/home目录下创建用户名同名的目录，这里可以指定；如果主目录同名目录存在，则不再创建，仅在登录时进入主目录。</li><li>–quiet： 即只打印警告和错误信息，忽略其他信息。</li><li>–debug： 定位错误信息。</li><li>–conf： 在创建用户时使用指定的configuration文件。</li><li>–force-badname： 默认在创建用户时会进行/etc/adduser.conf中的正则表达式检查用户名是否合法，如果想使用弱检查，则使用这个选项，如果不想检查，可以将/etc/adduser.conf中相关选项屏蔽。</li></ol><p><img src="https://source.acexy.cn/view/XW7p4uI"></p><h3 id="1-2-useradd"><a href="#1-2-useradd" class="headerlink" title="1.2 useradd"></a>1.2 useradd</h3><p>一般不怎么用这个，用到了再补。</p><h2 id="2、删除用户"><a href="#2、删除用户" class="headerlink" title="2、删除用户"></a>2、删除用户</h2><h3 id="2-1、deluser"><a href="#2-1、deluser" class="headerlink" title="2.1、deluser"></a>2.1、deluser</h3><p>只删除用户：</p><pre><code class="hljs she">sudo deluser tt</code></pre><p>输出显示：</p><pre><code class="hljs shel">正在删除用户 &#39;tt&#39;...警告：组&quot;tt&quot;没有其他成员了。完成。</code></pre><p>连同用户的主目录和邮箱一起删除：</p><pre><code class="hljs she">sudo deluser --remove-home tt</code></pre><p>输出显示：</p><pre><code class="hljs she">正在寻找要备份或删除的文件...正在删除文件...正在删除用户 &#39;tt&#39;...警告：组&quot;tt&quot;没有其他成员了。完成。</code></pre><p>连同用户拥有的所有文件删除：</p><pre><code class="hljs she">sudo deluser --remove-all-files tt</code></pre><p>相关文件：</p><pre><code class="hljs she">&#x2F;etc&#x2F;passwd - 使 用 者 帐 号 资 讯，可以查看用户信息&#x2F;etc&#x2F;shadow - 使 用 者 帐 号 资 讯 加 密&#x2F;etc&#x2F;group - 群 组 资 讯&#x2F;etc&#x2F;default&#x2F;useradd - 定 义 资 讯&#x2F;etc&#x2F;login.defs - 系 统 广 义 设 定&#x2F;etc&#x2F;skel - 内 含 定 义 档 的 目 录</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术干货</tag>
+      
+      <tag>小知识点</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>gitee码云部署hexo个人博客</title>
+    <link href="/2020/06/26/gitee%E7%A0%81%E4%BA%91%E9%83%A8%E7%BD%B2hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    <url>/2020/06/26/gitee%E7%A0%81%E4%BA%91%E9%83%A8%E7%BD%B2hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="gitee码云部署hexo个人博客"><a href="#gitee码云部署hexo个人博客" class="headerlink" title="gitee码云部署hexo个人博客"></a>gitee码云部署hexo个人博客</h1><p>因为之前是把hexo博客部署在github上，但是国内这访问速度属实着急，于是这次改为gitee，速度比github不知道快了多少，用最近的话说就是如丝般顺滑！</p><a id="more"></a><p>这篇主要是讲怎么把github的博客迁移到gitee上，具体的搭建博客过程这里并不涉及，之后也可能整合起来写一下。<br>废话不多说，直接开始。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>博客搭建</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术干货</tag>
+      
+      <tag>采坑日记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>树莓派4b-USB启动</title>
+    <link href="/2020/06/25/%E6%A0%91%E8%8E%93%E6%B4%BE4b-USB%E5%90%AF%E5%8A%A8/"/>
+    <url>/2020/06/25/%E6%A0%91%E8%8E%93%E6%B4%BE4b-USB%E5%90%AF%E5%8A%A8/</url>
+    
+    <content type="html"><![CDATA[<p>新买了树莓派4b,看网上说可以用USB启动，就试了一下，还可以。</p><hr><p>这里是正文</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>树莓派</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>技术干货</tag>
+      
+      <tag>树莓派</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2020/06/16/hello-world/"/>
+    <url>/2020/06/16/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="hljs bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="hljs bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="hljs bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
