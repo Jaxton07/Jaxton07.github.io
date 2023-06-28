@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>Java知识点-JVM(一) - MingBlog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"c7c9e96fb65c43046e95a00f062bf641","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Ming'Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/bg1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java知识点-JVM(一)">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-24 00:00" pubdate>
+        2020年11月24日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java知识点-JVM(一)</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Java知识点-JVM-一"><a href="#Java知识点-JVM-一" class="headerlink" title="Java知识点-JVM(一)"></a>Java知识点-JVM(一)</h1><h2 id="重点："><a href="#重点：" class="headerlink" title="重点："></a>重点：</h2><ol>
+<li>程序运行过程</li>
+<li>类的加载过程</li>
+<li>垃圾回收器（JVM垃圾回收机制，四个垃圾回收算法，垃圾回收器的分类和使用场景）</li>
+<li>运行时数据区（虚拟机栈、本地方法栈、程序计数器、方法区、堆）</li>
+<li>JVM调优（常用调优方式和工具，常用参数，）</li>
+</ol>
+<h2 id="一、程序运行过程"><a href="#一、程序运行过程" class="headerlink" title="一、程序运行过程"></a>一、程序运行过程</h2><ol>
+<li>先把java代码编译成字节码，也就是吧.java文件编译成.class文件，这个过程的大致执行流程：java源代码-&gt;词法分析-&gt;语法分析-&gt;语义分析-&gt;字节码生成。其实也就是编译原理的那些东西和流程，其中任何一个节点失败就会造成编译失败。</li>
+<li>把 .class文件放到java虚拟机，这个虚拟机通常指Oracle官方自带的Hotspot JVM；</li>
+<li>java虚拟机使用类加载器（Class Loader）装载class文件。</li>
+<li>类加载完成之后，会进行字节码校验，字节码校验通过之后JVM会把字节码翻译成机器码交由操作系统执行。但不是所有代码都是<strong>解释执行</strong>的，JVM对此作了优化，比如对于Hotspot虚拟机来说，它本身提供了JIT(Just In Time)也就是我们通常说的动态编译，它能够在运行时将热点代码编译为机器码，这个时候字节码就变成了<strong>编译执行</strong>。</li>
+</ol>
+<h2 id="二、类的加载过程（和上一点有些重复）"><a href="#二、类的加载过程（和上一点有些重复）" class="headerlink" title="二、类的加载过程（和上一点有些重复）"></a>二、类的加载过程（和上一点有些重复）</h2><ol>
+<li>加载：根据查找路径找到相应的 class文件然后导入。</li>
+<li>检查：检查加载的class 文件的正确性。</li>
+<li>准备：给类中的静态变量和静态代码块分配内存。</li>
+<li>解析：虚拟机将常量池中的符号引用换成直接引用。符号引用可以理解为一个标识，而直接引用直接指向内存中的地址。</li>
+<li>初始化：对静态变量和静态代码块执行初始化工作。</li>
+</ol>
+<h2 id="三、垃圾回收机制"><a href="#三、垃圾回收机制" class="headerlink" title="三、垃圾回收机制"></a>三、垃圾回收机制</h2><h3 id="1、如何确定某个对象是需要被回收的？"><a href="#1、如何确定某个对象是需要被回收的？" class="headerlink" title="1、如何确定某个对象是需要被回收的？"></a>1、如何确定某个对象是需要被回收的？</h3><p>JVM中主要有两种方法判定，一个是引用计数器，另一个是可达性分析。</p>
+<p><strong>引用计数器：</strong>为每个对象创建一个引用计数，有对象引用时计数器+1，引用被释放时计数器-1，当引用计数器为0是就可以回收。但是这个方法的缺点是不能解决循环引用的问题。</p>
+<p><strong>可达性分析：</strong>这个方法是通过一系列的“GC Roots”对象作为起点，从起点开始往下搜索，搜索过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是可以回收的。不过这个对象至少要经历两次标记过程才会真的变成可回收对象。</p>
+<h3 id="2、垃圾回收算法"><a href="#2、垃圾回收算法" class="headerlink" title="2、垃圾回收算法"></a>2、垃圾回收算法</h3><p>主要有以下四种垃圾回收算法，</p>
+<h4 id="2-1-标记-清除算法（Mark-Sweep）"><a href="#2-1-标记-清除算法（Mark-Sweep）" class="headerlink" title="2.1 标记-清除算法（Mark-Sweep）"></a>2.1 标记-清除算法（Mark-Sweep）</h4><p>这是最基础的垃圾回收算法，最简单也最容易实现。主要分为两个阶段：标记阶段和清除阶段。标记阶段的任务是标记出所有需要被回收的对象，清除阶段就是回收被标记的对象所占空间。标记-清除算法的缺点就是回收之后的的内存区域比较分散，不连续。</p>
+<p>回收之前：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/pKHRyu2iWCbegds.png" srcset="/img/loading.gif" alt="标记清除"></p>
+<p>回收之后：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/dqhnBj679fcpwoJ.png" srcset="/img/loading.gif" alt="标记清除"></p>
+<h4 id="2-2-复制算法（Copying）"><a href="#2-2-复制算法（Copying）" class="headerlink" title="2.2 复制算法（Copying）"></a>2.2 复制算法（Copying）</h4><p>为了解决标记-清除算法的缺陷，出现了复制算法，它将可用内存an容量划分为大小相等的两块，每次只使用其中的一块，当这一块的内存用完了，就讲还存活的对象复制到另一块上，然后再把当前这块使用的内存一次清理回收，这样就不会出现内存碎片的问题了。但是复制算法的缺点在于内存移动消耗太大。</p>
+<p>回收之前：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/OD1sL5a9khYWTHx.png" srcset="/img/loading.gif" alt="img"></p>
+<p>回收之后：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/nUiAWTq3tEdyeGV.png" srcset="/img/loading.gif" alt="img"></p>
+<h4 id="2-3-标记-整理算法（Mark-Compact）"><a href="#2-3-标记-整理算法（Mark-Compact）" class="headerlink" title="2.3 标记-整理算法（Mark-Compact）"></a>2.3 标记-整理算法（Mark-Compact）</h4><p>为了解决复制算法的问题，提出了标记整理算法。它也是分为两个阶段，第一个阶段是标记，但是在标记完之后不是直接清理可回收对象，而是将存活对象都向一端移动，然后清理边界以外的内存。</p>
+<p>回收之前：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/lxdEhkTMJrDvVF5.png" srcset="/img/loading.gif" alt="img"></p>
+<p>回收之后：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/S2AOyRHvK8sVr6P.png" srcset="/img/loading.gif" alt="img"></p>
+<h4 id="2-4-分代收集（Generational-Collection）"><a href="#2-4-分代收集（Generational-Collection）" class="headerlink" title="2.4 分代收集（Generational Collection）"></a>2.4 分代收集（Generational Collection）</h4><p>分代收集是目前大部分JVM的垃圾回收器采用的算法。它是根据对象的生命周期不同划分为若干个不同的区域，一般分为老生代和新生代，老生代每次只有少量对象被回收，新生代则有大量对象被回收。这样就可以根据不同代的特点采取最合适的收集算法。新生代一般用复制算法，新生代又分为Eden区域和 from survivor、以及to survivor区域，他们默认占比是8:1:1，每次垃圾回收时，</p>
+<ol>
+<li>把Eden和from survivor中存活的对象放入 to survivor区；</li>
+<li>清空Eden和from survivor区；</li>
+<li>From Survivor 和 To Survivor 分区交换，From Survivor 变 To Survivor，To Survivor 变 From Survivor。</li>
+</ol>
+<p>每次在from survivor 到 to survivor移动时都存活的对象，年龄就+1，当年龄达到15（默认值），就升级为老生代。大对象会直接进入老生代。</p>
+<p>老生代当空间占用达到某个值之后就会触发全局垃圾回收，一般使用标记-整理算法，以上循环往复。</p>
+<h3 id="3-典型的垃圾回收器"><a href="#3-典型的垃圾回收器" class="headerlink" title="3.典型的垃圾回收器"></a>3.典型的垃圾回收器</h3><h4 id="3-1-Serial-x2F-Serial-Old"><a href="#3-1-Serial-x2F-Serial-Old" class="headerlink" title="3.1 Serial&#x2F;Serial Old"></a>3.1 Serial&#x2F;Serial Old</h4><p>Serial&#x2F;Serial Old收集器是最基本最古老的收集器，它是一个单线程收集器，并且在它进行垃圾收集时，必须暂停所有用户线程。Serial收集器是针对新生代的收集器，采用的是Copying算法，Serial Old收集器是针对老年代的收集器，采用的是Mark-Compact算法。它的优点是实现简单高效，但是缺点是会给用户带来停顿。</p>
+<h4 id="3-2-ParNew"><a href="#3-2-ParNew" class="headerlink" title="3.2 ParNew"></a>3.2 ParNew</h4><p>ParNew收集器是Serial收集器的多线程版本，使用多个线程进行垃圾收集。</p>
+<h4 id="3-3-Parallel-Scavenge"><a href="#3-3-Parallel-Scavenge" class="headerlink" title="3.3 Parallel Scavenge"></a>3.3 Parallel Scavenge</h4><p>Parallel Scavenge收集器是一个新生代的多线程收集器（并行收集器），它在回收期间不需要暂停其他用户线程，其采用的是Copying算法，该收集器与前两个收集器有所不同，它主要是为了达到一个可控的吞吐量。</p>
+<h4 id="3-4-Parallel-Old"><a href="#3-4-Parallel-Old" class="headerlink" title="3.4 Parallel Old"></a>3.4 Parallel Old</h4><p>Parallel Old是Parallel Scavenge收集器的老年代版本（并行收集器），使用多线程和Mark-Compact算法。</p>
+<h4 id="3-5-CMS"><a href="#3-5-CMS" class="headerlink" title="3.5 CMS"></a>3.5 CMS</h4><p>CMS（Current Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器，它是一种并发收集器，采用的是Mark-Sweep算法。</p>
+<h4 id="3-6-G1"><a href="#3-6-G1" class="headerlink" title="3.6 G1"></a>3.6 G1</h4><p>G1收集器是当今收集器技术发展最前沿的成果，它是一款面向服务端应用的收集器，它能充分利用多CPU、多核环境。因此它是一款并行与并发收集器，并且它能建立可预测的停顿时间模型。</p>
+<p>四、运行时数据区</p>
+<p>五、JVM调优</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">小知识点</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/27/win10%20Anaconda%E7%8E%AF%E5%A2%83pythona%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEchromedriver/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">win10 Anaconda环境pythona安装配置chromedriver</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/24/Linux%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Linux命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c7c9e96fb65c43046e95a00f062bf641";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

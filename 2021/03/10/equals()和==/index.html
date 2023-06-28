@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>equals() 和 == - MingBlog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"c7c9e96fb65c43046e95a00f062bf641","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Ming'Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/bg1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="equals() 和 ==">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-10 00:00" pubdate>
+        2021年3月10日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      949 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">equals() 和 ==</h1>
+            
+            <div class="markdown-body">
+              <h1 id="equals-和-x3D-x3D"><a href="#equals-和-x3D-x3D" class="headerlink" title="equals() 和 &#x3D;&#x3D;"></a>equals() 和 &#x3D;&#x3D;</h1><h4 id="1、基本数据类型"><a href="#1、基本数据类型" class="headerlink" title="1、基本数据类型"></a>1、基本数据类型</h4><p>对于基本数据类型来说，&#x3D;&#x3D; 比较的是两者的值。如 int、byte、char、short、 long、float、double, boolean是转成int来存的，所以比较的是值。</p>
+<h4 id="2、封装类"><a href="#2、封装类" class="headerlink" title="2、封装类"></a>2、封装类</h4><p>对于封装类，比如 String、Integer等这些类 &#x3D;&#x3D; 比较的是对象的地址值.</p>
+<p>而equals() 作为Object 类的方法，默认比较的也是对象的地址值，</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object obj)</span> &#123;
+        <span class="hljs-keyword">return</span> (<span class="hljs-built_in">this</span> == obj);
+&#125;</code></pre></div>
+
+<p>但是 String 等封装类重写了equals() 方法，所以最后比较的是两者的数据值，而不是地址。</p>
+<p>String 重写的方法:</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object anObject)</span> &#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span> == anObject) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    &#125;
+    <span class="hljs-keyword">if</span> (anObject <span class="hljs-keyword">instanceof</span> String) &#123;
+        <span class="hljs-type">String</span> <span class="hljs-variable">anotherString</span> <span class="hljs-operator">=</span> (String)anObject;
+        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> value.length;
+        <span class="hljs-keyword">if</span> (n == anotherString.value.length) &#123;
+            <span class="hljs-type">char</span> v1[] = value;
+            <span class="hljs-type">char</span> v2[] = anotherString.value;
+            <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">while</span> (n-- != <span class="hljs-number">0</span>) &#123;
+                <span class="hljs-keyword">if</span> (v1[i] != v2[i])
+                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                i++;
+            &#125;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+&#125;</code></pre></div>
+
+
+
+<p>但是并不是说所有的 &#x3D;&#x3D; 和 equals() 比较的值都一定相等或一定不相等。</p>
+<p>看下面这段代码：</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testString</span><span class="hljs-params">()</span>&#123;
+        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2021-05-28&quot;</span>;
+        <span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2021-05-28&quot;</span>;
+        <span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;2021-05-28&quot;</span>);
+        <span class="hljs-type">Integer</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">127</span>;
+        <span class="hljs-type">Integer</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">127</span>;
+        <span class="hljs-type">Integer</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">128</span>;
+        <span class="hljs-type">Integer</span> <span class="hljs-variable">d</span> <span class="hljs-operator">=</span> <span class="hljs-number">128</span>;
+        System.out.println(<span class="hljs-string">&quot;a==b? :&quot;</span> + (a == b));		<span class="hljs-comment">//1</span>
+        System.out.println(<span class="hljs-string">&quot;c==d? :&quot;</span> + (c == d));		<span class="hljs-comment">//2</span>
+
+
+        <span class="hljs-type">String</span> <span class="hljs-variable">addr</span> <span class="hljs-operator">=</span> str.intern();
+        System.out.println(str == str2);		<span class="hljs-comment">//3</span>
+        System.out.println(str == str3);		<span class="hljs-comment">//4</span>
+        System.out.println(str.equals(str2));		<span class="hljs-comment">//5</span>
+        System.out.println(addr);		<span class="hljs-comment">//6</span>
+
+        System.out.println(<span class="hljs-string">&quot;a.addr:&quot;</span> + System.identityHashCode(a));		<span class="hljs-comment">//7</span>
+        System.out.println(<span class="hljs-string">&quot;b.addr:&quot;</span> + System.identityHashCode(b));		<span class="hljs-comment">//8</span>
+        System.out.println(<span class="hljs-string">&quot;c.addr:&quot;</span> + System.identityHashCode(c));		<span class="hljs-comment">//9</span>
+        System.out.println(<span class="hljs-string">&quot;d.addr:&quot;</span> + System.identityHashCode(d));		<span class="hljs-comment">//10</span>
+        System.out.println(<span class="hljs-string">&quot;str.addr:&quot;</span> + System.identityHashCode(str));		<span class="hljs-comment">//11</span>
+        System.out.println(<span class="hljs-string">&quot;str2.addr:&quot;</span> + System.identityHashCode(str2));		<span class="hljs-comment">//12</span>
+        System.out.println(<span class="hljs-string">&quot;str3.addr:&quot;</span> + System.identityHashCode(str3));		<span class="hljs-comment">//13</span>
+
+    &#125;</code></pre></div>
+
+<p>执行后的结果：</p>
+<div class="hljs"><pre><code class="hljs java">a==b? :<span class="hljs-literal">true</span>						<span class="hljs-comment">//1</span>
+c==d? :<span class="hljs-literal">false</span>					<span class="hljs-comment">//2</span>
+<span class="hljs-literal">true</span>							<span class="hljs-comment">//3</span>
+<span class="hljs-literal">false</span>							<span class="hljs-comment">//4</span>
+<span class="hljs-literal">true</span>							<span class="hljs-comment">//5</span>
+<span class="hljs-number">2021</span>-<span class="hljs-number">05</span>-<span class="hljs-number">28</span>						<span class="hljs-comment">//6</span>
+a.addr:<span class="hljs-number">1735600054</span>				<span class="hljs-comment">//7</span>
+b.addr:<span class="hljs-number">1735600054</span>				<span class="hljs-comment">//8</span>
+c.addr:<span class="hljs-number">21685669</span>					<span class="hljs-comment">//9</span>
+d.addr:<span class="hljs-number">2133927002</span>				<span class="hljs-comment">//10</span>
+str.addr:<span class="hljs-number">1836019240</span>				<span class="hljs-comment">//11</span>
+str2.addr:<span class="hljs-number">1836019240</span>			<span class="hljs-comment">//12</span>
+str3.addr:<span class="hljs-number">325040804</span>				<span class="hljs-comment">//13</span></code></pre></div>
+
+
+
+<p>我们先来看第五条，str 和 str3 的值相等，所以 equals() 比较两者为 true,这符合我们的预期结果。</p>
+<p>3：</p>
+<p>既然说封装类 &#x3D;&#x3D; 比较的是地址，那为什么 str 和 str2 &#x3D;&#x3D; 比较的结果却是true 呢，原因就是这两个引用指向的是同一个对象。为什么？原因是为了减少或避免重复创建相同的对象，jdk有一个常量池，对于String 来说我们暂且称为 字符串常量池。在 str 被创建的时候这个字符串就被添加到了常量池。下次给对象用 &#x3D;&#x3D; 赋值时，如果常量池中存在相同的字符串，那就直接把引用地址赋给新对象的引用，也就是 str2。所以两者指向的是同一个对象，同一个地址。</p>
+<p>4：</p>
+<p>那么为什么创建 str3 的时候赋的也是一样的值，但是 str &#x3D;&#x3D; str3 的结果却为 false？因为用  new String(“2021-05-28”) 就重新创建了一个新的对象，而不是直接把常量池的对象引用赋给它。自然就不是同一个地址。</p>
+<p>1：</p>
+<p>知道上面的原因后，我们就大概可以知道为什么 a &#x3D;&#x3D; b 为 true 了，也是常量池直接把引用赋给新对象引用。所以两个变量指向的是同一个对象，同一个地址。</p>
+<p>2：</p>
+<p>但是为什么同样的语句，c 和 d 就不行了？</p>
+<p>因为 int 的常量池有个范围限制，总不可能把所有的数都放到常量池里，而这个范围上限就是 127，所以超过 127 的就会重新创建对象，重新分配地址。</p>
+<p>6：</p>
+<p>String.intern()方法就是看常量池中有没有相同的字符串，有就返回该字符串的引用，没有就添加新字符串到常量池。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">小知识点</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Java/">Java</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/13/java%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%E8%AF%A6%E8%A7%A3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">静态代码块详解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">设计模式-工厂模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c7c9e96fb65c43046e95a00f062bf641";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

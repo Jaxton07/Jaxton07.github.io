@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>树莓派4B ubuntu18.04 安装Docker - MingBlog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"c7c9e96fb65c43046e95a00f062bf641","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Ming'Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/bg1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="树莓派4B ubuntu18.04 安装Docker">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-10 00:00" pubdate>
+        2021年1月10日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      584 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">树莓派4B ubuntu18.04 安装Docker</h1>
+            
+            <div class="markdown-body">
+              <h1 id="树莓派4B-ubuntu18-04-安装Docker与卸载"><a href="#树莓派4B-ubuntu18-04-安装Docker与卸载" class="headerlink" title="树莓派4B ubuntu18.04 安装Docker与卸载"></a>树莓派4B ubuntu18.04 安装Docker与卸载</h1><h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><h3 id="1、更换软件源"><a href="#1、更换软件源" class="headerlink" title="1、更换软件源"></a>1、更换软件源</h3><p>如果已经更换过可以跳过，没有更换的话下载很慢，最好换成国内源</p>
+<h3 id="2、安装需要的包"><a href="#2、安装需要的包" class="headerlink" title="2、安装需要的包"></a>2、安装需要的包</h3><div class="hljs"><pre><code class="hljs shell">sudo apt install apt-transport-https ca-certificates software-properties-common curl</code></pre></div>
+
+
+
+<h3 id="3、添加-GPG-密钥，并添加-Docker-ce-软件源"><a href="#3、添加-GPG-密钥，并添加-Docker-ce-软件源" class="headerlink" title="3、添加 GPG 密钥，并添加 Docker-ce 软件源"></a>3、添加 GPG 密钥，并添加 Docker-ce 软件源</h3><p>这里添加中科大的 Docker-ce 源，添加 GPG 密钥：</p>
+<div class="hljs"><pre><code class="hljs shell">curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</code></pre></div>
+
+<p>安装上即可，一般不需要验证</p>
+<p>添加 Docker-ce 源：</p>
+<div class="hljs"><pre><code class="hljs shell">sudo add-apt-repository &quot;deb [arch=arm64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot;</code></pre></div>
+
+<p>树莓派是ARM架构的，所以在添加源时应当指定参数：arch&#x3D;arm64</p>
+<h3 id="4、然后更新软件包"><a href="#4、然后更新软件包" class="headerlink" title="4、然后更新软件包"></a>4、然后更新软件包</h3><div class="hljs"><pre><code class="hljs shel">sudo apt update</code></pre></div>
+
+
+
+<h3 id="5、安装-Docker"><a href="#5、安装-Docker" class="headerlink" title="5、安装 Docker"></a>5、安装 Docker</h3><div class="hljs"><pre><code class="hljs shell">sudo apt-get install docker-ce docker-ce-cli containerd.io</code></pre></div>
+
+
+
+<h3 id="6、验证"><a href="#6、验证" class="headerlink" title="6、验证"></a>6、验证</h3><div class="hljs"><pre><code class="hljs shell">docker info</code></pre></div>
+
+
+
+<h3 id="7、设置开机自启动并启动-Docker-ce（安装成功后默认已设置并启动，可忽略）"><a href="#7、设置开机自启动并启动-Docker-ce（安装成功后默认已设置并启动，可忽略）" class="headerlink" title="7、设置开机自启动并启动 Docker-ce（安装成功后默认已设置并启动，可忽略）"></a>7、设置开机自启动并启动 Docker-ce（安装成功后默认已设置并启动，可忽略）</h3><div class="hljs"><pre><code class="hljs shell">sudo systemctl enable docker
+sudo systemctl start docker</code></pre></div>
+
+
+
+<h3 id="8、测试运行"><a href="#8、测试运行" class="headerlink" title="8、测试运行"></a>8、测试运行</h3><div class="hljs"><pre><code class="hljs shell">sudo docker run hello-world</code></pre></div>
+
+
+
+<h3 id="9、运行命令"><a href="#9、运行命令" class="headerlink" title="9、运行命令"></a>9、运行命令</h3><div class="hljs"><pre><code class="hljs shell">docker run --name nextcloud   -p 81:80   -v /usbu/program/docker/volumes:/var/lib/docker/volumes  -d nextcloud</code></pre></div>
+
+<p>:前是宿主机文件夹，后面是容器共享文件夹</p>
+<h3 id="10、添加当前用户到-docker-用户组，可以不用-sudo-运行-docker（可选）"><a href="#10、添加当前用户到-docker-用户组，可以不用-sudo-运行-docker（可选）" class="headerlink" title="10、添加当前用户到 docker 用户组，可以不用 sudo 运行 docker（可选）"></a>10、添加当前用户到 docker 用户组，可以不用 sudo 运行 docker（可选）</h3><div class="hljs"><pre><code class="hljs shell">sudo groupadd docker
+sudo usermod -aG docker $USER</code></pre></div>
+
+
+
+<h3 id="11、测试添加用户组（可选）"><a href="#11、测试添加用户组（可选）" class="headerlink" title="11、测试添加用户组（可选）"></a>11、测试添加用户组（可选）</h3><div class="hljs"><pre><code class="hljs shell">docker run hello-world</code></pre></div>
+
+
+
+
+
+<h2 id="二、卸载"><a href="#二、卸载" class="headerlink" title="二、卸载"></a>二、卸载</h2><h3 id="1、运行以下命令以停止所有正在运行的容器并删除所有docker对象："><a href="#1、运行以下命令以停止所有正在运行的容器并删除所有docker对象：" class="headerlink" title="1、运行以下命令以停止所有正在运行的容器并删除所有docker对象："></a>1、运行以下命令以停止所有正在运行的容器并删除所有docker对象：</h3><div class="hljs"><pre><code class="hljs shel">docker container stop $(docker container ls -aq)
+docker system prune -a --volumes</code></pre></div>
+
+
+
+
+
+<h4 id="2、删除某软件-及其安装时自动安装的所有包"><a href="#2、删除某软件-及其安装时自动安装的所有包" class="headerlink" title="2、删除某软件,及其安装时自动安装的所有包"></a>2、删除某软件,及其安装时自动安装的所有包</h4><div class="hljs"><pre><code class="hljs shell">sudo apt-get autoremove docker docker-ce docker-engine  docker.io  containerd runc</code></pre></div>
+
+
+
+<h4 id="3、删除docker其他没有没有卸载"><a href="#3、删除docker其他没有没有卸载" class="headerlink" title="3、删除docker其他没有没有卸载"></a>3、删除docker其他没有没有卸载</h4><div class="hljs"><pre><code class="hljs shel">dpkg -l | grep docker</code></pre></div>
+
+
+
+<h4 id="4、卸载没有删除的docker相关插件-结合自己电脑的实际情况"><a href="#4、卸载没有删除的docker相关插件-结合自己电脑的实际情况" class="headerlink" title="4、卸载没有删除的docker相关插件(结合自己电脑的实际情况)"></a>4、卸载没有删除的docker相关插件(结合自己电脑的实际情况)</h4><div class="hljs"><pre><code class="hljs shell">sudo apt-get autoremove docker-ce-*</code></pre></div>
+
+
+
+
+
+<h4 id="5、删除docker的相关配置-amp-目录"><a href="#5、删除docker的相关配置-amp-目录" class="headerlink" title="5、删除docker的相关配置&amp;目录"></a>5、删除docker的相关配置&amp;目录</h4><div class="hljs"><pre><code class="hljs shell">sudo rm -rf /etc/systemd/system/docker.service.d
+sudo rm -rf /var/lib/docker</code></pre></div>
+
+
+
+<h4 id="6、确定docker卸载完毕"><a href="#6、确定docker卸载完毕" class="headerlink" title="6、确定docker卸载完毕"></a>6、确定docker卸载完毕</h4><div class="hljs"><pre><code class="hljs shell">docker --version</code></pre></div>
+
+
+
+<h2 id="三、更改docker存储目录"><a href="#三、更改docker存储目录" class="headerlink" title="三、更改docker存储目录"></a>三、更改docker存储目录</h2><h4 id="1、先停止docker-服务"><a href="#1、先停止docker-服务" class="headerlink" title="1、先停止docker 服务"></a>1、先停止docker 服务</h4><div class="hljs"><pre><code class="hljs shell">systemctl stop docker</code></pre></div>
+
+
+
+<h4 id="2、修改配置文件"><a href="#2、修改配置文件" class="headerlink" title="2、修改配置文件"></a>2、修改配置文件</h4><div class="hljs"><pre><code class="hljs shell">vim /usr/lib/systemd/system/docker.service
+
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph /mnt/sde/docker</code></pre></div>
+
+<p>在最后加上：</p>
+<div class="hljs"><pre><code class="hljs shell">--graph /mnt/sde/docker</code></pre></div>
+
+<p>&#x2F;mnt&#x2F;sde&#x2F;docker 就是新目录</p>
+<h4 id="3、重新载入配置"><a href="#3、重新载入配置" class="headerlink" title="3、重新载入配置"></a>3、重新载入配置</h4><div class="hljs"><pre><code class="hljs shell">systemctl daemon-reload</code></pre></div>
+
+
+
+<h4 id="4、重启服务"><a href="#4、重启服务" class="headerlink" title="4、重启服务"></a>4、重启服务</h4><div class="hljs"><pre><code class="hljs shell">systemctl start docker</code></pre></div>
+
+
+
+<h4 id="5、验证配置"><a href="#5、验证配置" class="headerlink" title="5、验证配置"></a>5、验证配置</h4><div class="hljs"><pre><code class="hljs shell">docker info</code></pre></div>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%80%E6%9C%AF%E5%B9%B2%E8%B4%A7/">技术干货</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/10/WSL2%20Ubuntu18.04%20DNS%20%E9%97%AE%E9%A2%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WSL2 Ubuntu18.04 DNS 问题（apt-get update失败）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/07/Ubuntu18.04%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85MySql/">
+                        <span class="hidden-mobile">Ubuntu18.04服务器安装MySql</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c7c9e96fb65c43046e95a00f062bf641";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

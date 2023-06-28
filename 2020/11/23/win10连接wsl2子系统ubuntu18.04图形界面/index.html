@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>win10连接wsl2子系统ubuntu18.04图形界面 - MingBlog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"c7c9e96fb65c43046e95a00f062bf641","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Ming'Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/bg1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="win10连接wsl2子系统ubuntu18.04图形界面">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-23 00:00" pubdate>
+        2020年11月23日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      651 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">win10连接wsl2子系统ubuntu18.04图形界面</h1>
+            
+            <div class="markdown-body">
+              <h1 id="win10连接wsl2子系统ubuntu18-04图形界面"><a href="#win10连接wsl2子系统ubuntu18-04图形界面" class="headerlink" title="win10连接wsl2子系统ubuntu18.04图形界面"></a>win10连接wsl2子系统ubuntu18.04图形界面</h1><p>网上很多教程很多是用的 xfce4 和 VcXsrv ，虽然也可以，但是本次想玩点花的，所以想用 gnome 加上win10自带的远程桌面程序来连接，我记得之前连服务器的时候就是用的win10自带的远程桌面程序，感觉也挺好用的，不知道为啥网上都是用 VcXsrv 。。。而且主要是感觉过程也不怎么简单，还要另外下远程连接的软件，下载的速度还贼慢。。。安装的整个过程也是相当曲折，一方面网上关于这方面的基本搜不到，我也只查了很多零零散散的博客和资料看了之后将各种方法拼凑了一下。</p>
+<p>中途遇到一些坑，导致wsl直接启动不了，重装也无济于事。。。索性最后成功了。为了以后不再踩同样的坑，在这里记录一下。</p>
+<h3 id="1、安装systemd"><a href="#1、安装systemd" class="headerlink" title="1、安装systemd"></a>1、安装systemd</h3><p>查的资料说 gnome 桌面是基于 systemd 的，但是目前(2020.11.23) WSL 还不自带 systemd ，反正还有点问题吧，然后就只能我们自己安装，这里就是第一个坑，也就是<strong>导致 WSL 进不去的原因</strong>。</p>
+<p>首先，我们在安装systemd之前一定要检查一下自己的WSL 系统有没有 <strong>daemonize</strong>  ，没有的话需要提前安装，不然之后安装了systemd会导致进不去WSL：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/2YjG4zlu8SmJvyq.png" srcset="/img/loading.gif" alt="没装dasmonize"></p>
+<p>查看有没有 <strong>daemonize</strong>：</p>
+<div class="hljs"><pre><code class="hljs java">which daemonize</code></pre></div>
+
+<p>如果有的话会输出路径信息，例如：&#x2F;usr&#x2F;bin&#x2F;daemonize</p>
+<p>如果什么都没有输出的话就是没有了。可以用以下命令安装：</p>
+<div class="hljs"><pre><code class="hljs java">sudo apt-get install daemonize</code></pre></div>
+
+
+
+<p>装好之后，就可以继续安装systemd了。运行命令更新软件列表：</p>
+<div class="hljs"><pre><code class="hljs java">sudo apt update</code></pre></div>
+
+<p>然后需要安装git，安装过的可以不用：</p>
+<div class="hljs"><pre><code class="hljs java">sudo apt install git</code></pre></div>
+
+
+
+<p>下载<strong>systemd</strong>：</p>
+<div class="hljs"><pre><code class="hljs java">git clone https:<span class="hljs-comment">//github.com/DamionGans/ubuntu-wsl2-systemd-script.git</span></code></pre></div>
+
+<p>进入目录：</p>
+<div class="hljs"><pre><code class="hljs java">cd ubuntu-wsl2-systemd-script/</code></pre></div>
+
+<p>运行：</p>
+<div class="hljs"><pre><code class="hljs java">bash ubuntu-wsl2-systemd-script.sh</code></pre></div>
+
+
+
+<p>这就安装完成了，然后重启WSL子系统或者重启电脑。</p>
+<h3 id="2、安装gnome桌面"><a href="#2、安装gnome桌面" class="headerlink" title="2、安装gnome桌面"></a>2、安装gnome桌面</h3><div class="hljs"><pre><code class="hljs java">sudo apt update
+sudo apt install -y ubuntu-desktop</code></pre></div>
+
+
+
+<p>安装好之后安装Xrdp：</p>
+<div class="hljs"><pre><code class="hljs java">sudo apt install -y xrdp
+sudo systemctl status xrdp</code></pre></div>
+
+
+
+<div class="hljs"><pre><code class="hljs java">sudo adduser xrdp ssl-cert
+sudo systemctl restart xrdp</code></pre></div>
+
+
+
+<p>看一下端口，一般默认是 3389 ：</p>
+<div class="hljs"><pre><code class="hljs java">vim /etc/xrdp/xrdp.ini</code></pre></div>
+
+
+
+<p>配置防火墙：</p>
+<div class="hljs"><pre><code class="hljs java">sudo ufw allow <span class="hljs-number">3389</span></code></pre></div>
+
+
+
+<p>马上就大功告成了！</p>
+<h3 id="3、连接远程桌面"><a href="#3、连接远程桌面" class="headerlink" title="3、连接远程桌面"></a>3、连接远程桌面</h3><p>注意连接的时候一定要保持xrdp服务运行，重启wsl之后要打开一下。</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/Hq93eRSKoNYWnQC.png" srcset="/img/loading.gif" alt="win10远程桌面1"></p>
+<p>输入wsl的账号密码：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/Q5R3EFJmTKZC4fi.png" srcset="/img/loading.gif" alt="win10远程桌面连接登录"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/EriWang520/images/blob/main">https://github.com/EriWang520/images/blob/main</a></p>
+<p>进入桌面：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/pfKWLguNmi2YrtQ.png" srcset="/img/loading.gif" alt="gnome桌面1"></p>
+<p>大功告成啦！</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%A8%E6%89%8B%E5%AE%9E%E6%93%8D/">动手实操</a>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/24/Linux%E5%91%BD%E4%BB%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/18/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8Ubuntu18.04%E5%AE%89%E8%A3%85jdk/">
+                        <span class="hidden-mobile">云服务器Ubuntu18.04安装jdk</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c7c9e96fb65c43046e95a00f062bf641";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

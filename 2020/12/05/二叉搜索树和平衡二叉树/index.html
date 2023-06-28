@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>二叉搜索树和平衡二叉树 - MingBlog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.1.2/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"c7c9e96fb65c43046e95a00f062bf641","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Ming'Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/bg1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="二叉搜索树和平衡二叉树">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-05 00:00" pubdate>
+        2020年12月5日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">二叉搜索树和平衡二叉树</h1>
+            
+            <div class="markdown-body">
+              <h1 id="二叉搜索树和平衡二叉树"><a href="#二叉搜索树和平衡二叉树" class="headerlink" title="二叉搜索树和平衡二叉树"></a>二叉搜索树和平衡二叉树</h1><p>虽然之前看过二叉树的，但是时间久了还是容易模糊，所以这里继续记录一下。而且主要是看到一篇非常形象好理解的博客，所以这里转载一下，自己做个保存。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25940921/article/details/82183093">https://blog.csdn.net/qq_25940921/article/details/82183093</a></p>
+<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><p>　　二叉查找树，也称二叉搜索树，或二叉排序树。其定义也比较简单，要么是一颗空树，要么就是具有如下性质的二叉树：</p>
+<p>（1）若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</p>
+<p>（2） 若任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</p>
+<p>（3） 任意节点的左、右子树也分别为二叉查找树；</p>
+<p>（4） 没有键值相等的节点。</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/KFnUASyHam9idBe.png" srcset="/img/loading.gif" alt="img"></p>
+<p>如上图所示，是不同形态的二叉查找树。二叉查找树是对要查找的数据进行生成树，左支的值小于右支的值。在查找的时候也是一样的思路，从根节点开始，比节点大进入右支，比节点小进入左支，直到查找到目标值。</p>
+<p>　　二叉查找树的插入算法比较简单：空树，就首先生成根节点；不是空树就按照查找的算法，找到父节点，然后作为叶子节点插入，如果值已经存在就插入失败。</p>
+<p>　　删除操作稍微复杂一点，有如下几种情况：</p>
+<p> （1）如果删除的是叶节点，可以直接删除；</p>
+<p> （2）如果被删除的元素有一个子节点，可以将子节点直接移到被删除元素的位置；</p>
+<p> （3）如果有两个子节点，这时候就采用中序遍历，找到待删除的节点的后继节点，将其与待删除的节点互换，此时待删除节点的位置已经是叶子节点，可以直接删除。如下图：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/mqac19Lg5nQVIOD.png" srcset="/img/loading.gif" alt="image-20201205164030082"></p>
+<p>将待删除节点与后继节点互换，变成如下图所示：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/Y6lyC4A2aveMD5Q.png" srcset="/img/loading.gif" alt="image-20201205165616516"></p>
+<p>将待删除元素删除，如下图所示：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/CbRF1gywjDhGNrm.png" srcset="/img/loading.gif" alt="image-20201205165647271"></p>
+<p>另外，二叉查找树还有一个性质，即<strong>对二叉查找树进行中序遍历，即可得到有序的数列。</strong></p>
+<p>　　二叉查找树的查询复杂度，和二分查找一样，插入和查找的时间复杂度均为 O(logn) ，但是在最坏的情况下仍然会有 O(n) 的时间复杂度。原因在于插入和删除元素的时候，树没有保持平衡（如上不同形态的二叉树图中的b）。</p>
+<h2 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h2><p>　　平衡二叉搜索树，又被称为AVL树，且具有以下性质：<strong>它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</strong> —-来自百度百科</p>
+<p>　　由于普通的二叉查找树会容易失去”平衡“，极端情况下，二叉查找树会退化成线性的链表，导致插入和查找的复杂度下降到 O(n) ，所以，这也是平衡二叉树设计的初衷。那么平衡二叉树如何保持”平衡“呢？根据定义，有两个重点，一是左右两子树的高度差的绝对值不能超过1，二是左右两子树也是一颗平衡二叉树。</p>
+<p>　　如下图所示，左图是一棵平衡二叉树，根节点10，左右两子树的高度差是1，而右图，虽然根节点左右两子树高度差是0，但是右子树15的左右子树高度差为2，不符合定义，所以右图不是一棵平衡二叉树。</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/EmVkD6l4MxeCAIH.png" srcset="/img/loading.gif" alt="image-20201205165758268"></p>
+<p>由此可以看出平衡二叉树是一棵高度平衡的二叉查找树。所以，要构建跟维系一棵平衡二叉树就比普通的二叉树要复杂的多。在构建一棵平衡二叉树的过程中，当有新的节点要插入时，检查是否因插入后而破坏了树的平衡，如果是，则需要做旋转去改变树的结构。</p>
+<p>　　关于旋转，这东西不拿动态图将还真很难讲明白。所以我就借一下 <a target="_blank" rel="noopener" href="https://blog.csdn.net/sun_tttt/article/details/65445754">最容易懂得红黑树</a> 这篇文章中左旋右旋的图来讲。</p>
+<p> <strong>左旋</strong>：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/HtmRgJGCSq4Mkjz.gif" srcset="/img/loading.gif" alt="左旋"></p>
+<p><strong>右旋</strong>：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/RJaT1LlOso9xGrc.gif" srcset="/img/loading.gif" alt="右旋"></p>
+<p>不同于顺时针跟逆时针变换这种方式去记忆，上面两个动态图特别方便记忆跟理解：</p>
+<p>　　<strong>左旋就是将节点的右支往左拉，右子节点变成父节点，并把晋升之后多余的左子节点出让给降级节点的右子节点；</strong></p>
+<p>　　<strong>而右旋就是反过来，将节点的左支往右拉，左子节点变成了父节点，并把晋升之后多余的右子节点出让给降级节点的左子节点。</strong></p>
+<p>　　<strong>即左旋就是往左变换，右旋就是往右变换。</strong>不管是左旋还是右旋，旋转的目的都是<strong>将节点多的一支出让节点给另一个节点少的一支</strong>。</p>
+<p>　　举个例子，像上图是否平衡二叉树的图里面，左图在没插入前”19“节点前，该树还是平衡二叉树，但是在插入”19“后，导致了”15“的左右子树失去了”平衡“，所以此时可以将”15“节点进行左旋，让”15“自身把节点出让给”17“作为”17“的左树，使得”17“节点左右子树平衡，而”15“节点没有子树，左右也平衡了。如下图，</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/DTqPaSQ4frCXJyN.png" srcset="/img/loading.gif" alt="image-20201205170026045"></p>
+<p>由于在构建平衡二叉树的时候，当有<strong>新节点插入</strong>时，都会判断插入后时候平衡，这说明了插入新节点前，都是平衡的，也即高度差绝对值不会超过1。当新节点插入后，有可能会有导致树不平衡，这时候就需要进行调整，而可能出现的情况就有4种，分别称作<strong>左左，左右，右左，右右</strong>。</p>
+<p><strong>左左</strong>：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/6g1y7xAHQutwqk4.png" srcset="/img/loading.gif" alt="image-20201205170102008"></p>
+<p>左左即为在原来平衡的二叉树上，在节点的左子树的左子树下，有新节点插入，导致节点的左右子树的高度差为2，如上即为”10“节点的左子树”7“，的左子树”4“，插入了节点”5“或”3“导致失衡。</p>
+<p>　　左左调整其实比较简单，只需要对节点进行右旋即可，如下图，对节点”10“进行右旋，</p>
+<p>　　注意：如果对左右旋变换还不是很懂或不是很熟练的，可以对照着前面的那两个动图去想象，自己动手变换几次，就明白了。</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/ohVw9Znm4xlbStN.png" srcset="/img/loading.gif" alt="image-20201205170211537"></p>
+<p><strong>左右</strong>：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/9BYk6CqoFsriyh7.png" srcset="/img/loading.gif" alt="image-20201205170256122"></p>
+<p>左右即为在原来平衡的二叉树上，在节点的左子树的右子树下，有新节点插入，导致节点的左右子树的高度差为2，如上即为”11“节点的左子树”7“，的右子树”9“，插入了节点”10“或”8“导致失衡。</p>
+<p>　　左右的调整就不能像左左一样，进行一次旋转就完成调整。我们不妨先试着让左右像左左一样对”11“节点进行右旋，结果图如下，右图的二叉树依然不平衡，而右图就是接下来要讲的右左，即左右跟右左互为镜像，左左跟右右也互为镜像。</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/CcseN1OY3GHkuaL.png" srcset="/img/loading.gif" alt="image-20201205170343470"></p>
+<p><strong>右右跟左左一样，只需要旋转一次就能把树调整平衡，而左右跟右左也一样，都要进行旋转两次才能把树调整平衡</strong>，所以，首先上图的这种调整是错误的，正确的调整方式是，将左右进行第一次旋转，将左右先调整成左左，然后再对左左进行调整，从而使得二叉树平衡。</p>
+<p>　　即先对上图的节点”7“进行左旋，使得二叉树变成了左左，之后再对”11“节点进行右旋，此时二叉树就调整完成，如下图，</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/DSsq3UgfRcAVbj5.png" srcset="/img/loading.gif" alt="image-20201205170418373"></p>
+<p><strong>右左</strong>：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/9Bl1xXWQasONyeu.png" srcset="/img/loading.gif" alt="image-20201205170456817"></p>
+<p>右左即为在原来平衡的二叉树上，在节点的右子树的左子树下，有新节点插入，导致节点的左右子树的高度差为2，如上即为”11“节点的右子树”15“，的左子树”13“，插入了节点”12“或”14“导致失衡。</p>
+<p>　　前面也说了，右左跟左右其实互为镜像，所以调整过程就反过来，先对节点”15“进行右旋，使得二叉树变成右右，之后再对”11“节点进行左旋，此时二叉树就调整完成，如下图，</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/5jixoMl3efBb7nW.png" srcset="/img/loading.gif" alt="image-20201205170522548"></p>
+<p><strong>右右</strong>：</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/hHfPa9wKxGRSYnm.png" srcset="/img/loading.gif" alt="image-20201205170559188"></p>
+<p>右右即为在原来平衡的二叉树上，在节点的右子树的右子树下，有新节点插入，导致节点的左右子树的高度差为2，如上即为”11“节点的右子树”13“，的左子树”15“，插入了节点”14“或”19“导致失衡。</p>
+<p>　　右右只需对节点进行一次左旋即可调整平衡，如下图，对”11“节点进行左旋。</p>
+<p><img src="https://github.com/EriWang520/images/blob/main/img/eTaNyrdnDUIqt5Q.png" srcset="/img/loading.gif" alt="image-20201205170632008"></p>
+<p>平衡二叉树构建的过程，就是节点插入的过程，插入失衡情况就上面4种，算简单了，下面讲下<strong>平衡二叉树节点的删除</strong>，删除的情况会复杂一点，复杂的原因主要在于删除了节点之后要维系二叉树的平衡，但是删除二叉树节点总结起来就两个判断：<strong>①删除的是什么类型的节点？②删除了节点之后是否导致失衡？</strong></p>
+<p>　　节点的类型有三种：1.叶子节点；2.只有左子树或只有右子树；3.既有左子树又有右子树。</p>
+<p>　　针对这三种节点类型，再引入判断②，所以<strong>处理思路</strong>分别是：</p>
+<p>（1）当删除的节点是叶子节点，则将节点删除，然后从父节点开始，判断是否失衡，如果没有失衡，则再判断父节点的父节点是否失衡，直到根节点，此时到根节点还发现没有失衡，则说此时树是平衡的；如果中间过程发现失衡，则判断属于哪种类型的失衡（左左，左右，右左，右右），然后进行调整。</p>
+<p>（2）删除的节点只有左子树或只有右子树，这种情况其实就比删除叶子节点的步骤多一步，就是将节点删除，然后把仅有一支的左子树或右子树替代原有结点的位置，后面的步骤就一样了，从父节点开始，判断是否失衡，如果没有失衡，则再判断父节点的父节点是否失衡，直到根节点，如果中间过程发现失衡，则根据失衡的类型进行调整。</p>
+<p>（3）删除的节点既有左子树又有右子树，这种情况又比上面这种多一步，就是中序遍历，找到待删除节点的前驱或者后驱都行，然后与待删除节点互换位置，然后把待删除的节点删掉，后面的步骤也是一样，判断是否失衡，然后根据失衡类型进行调整。</p>
+<p>　　最后总结一下，平衡二叉树是一棵高度平衡的二叉树，所以<strong>查询的时间复杂度是 O(logN)</strong> 。<strong>插入</strong>的话上面也说，失衡的情况有4种，左左，左右，右左，右右，即一旦插入新节点导致失衡需要调整，<strong>最多也只要旋转2次</strong>，所以，<strong>插入复杂度是 O(1)</strong> ，但是平衡二叉树也不是完美的，也有<strong>缺点</strong>，从上面删除处理思路中也可以看到，就是<strong>删除节点时有可能因为失衡，导致需要从删除节点的父节点开始，不断的回溯到根节点，如果这棵平衡二叉树很高的话，那中间就要判断很多个节点</strong>。所以后来也出现了综合性能比其更好的树—-<strong>红黑树</strong>，后面再讲。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">小知识点</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/">数据结构和算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/30/Java%E7%9F%A5%E8%AF%86%E7%82%B9-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java知识点-深拷贝和浅拷贝</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/02/IDEA%E5%BF%AB%E6%8D%B7%E9%94%AE-Windows/">
+                        <span class="hidden-mobile">IDEA快捷键-Windows</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c7c9e96fb65c43046e95a00f062bf641";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
