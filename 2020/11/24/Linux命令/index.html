@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.9k 字
+      4.7k 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      68
+      65
        分钟
     </span>
   
@@ -227,24 +227,24 @@
             <h1 style="display: none">Linux命令</h1>
             
             <div class="markdown-body">
-              <h1 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h1><h2 id="一、文件、目录操作命令"><a href="#一、文件、目录操作命令" class="headerlink" title="一、文件、目录操作命令"></a>一、文件、目录操作命令</h2><h4 id="1、ls命令"><a href="#1、ls命令" class="headerlink" title="1、ls命令"></a>1、ls命令</h4><p>功能：显示文件和目录的信息<br>ls　以默认方式显示当前目录文件列表<br>ls -a 显示所有文件包括隐藏文件<br>ls -l 显示文件属性，包括大小，日期，符号连接，是否可读写及是否可执行<br>ls -lh 显示文件的大小，以容易理解的格式印出文件大小 (例如 1K 234M 2G)<br>ls -lt 显示文件，按照修改时间排序<br> ls -F 在列出的文件名和目录名后添加标志。例如，在可执行文件后添加“*”，在目录名后添加“&#x2F;”以区分不同的类型。</p>
-<h4 id="2、cd命令"><a href="#2、cd命令" class="headerlink" title="2、cd命令"></a>2、cd命令</h4><p>功能：进入目录<br>cd dir　切换到当前目录下的dir目录<br>cd &#x2F;　切换到根目录<br>cd ..　切换到到上一级目录<br>cd ..&#x2F;..　切换到上二级目录<br>cd ~　切换到用户目录，比如是root用户，则切换到&#x2F;root下</p>
-<h4 id="3、cp命令"><a href="#3、cp命令" class="headerlink" title="3、cp命令"></a>3、cp命令</h4><p>功能：copy文件<br>cp source target　将文件source复制为target<br>cp &#x2F;root &#x2F;source .　将&#x2F;root下的文件source复制到当前目录<br>cp –av soure_dir target_dir　将整个目录复制，两目录完全一样</p>
+              <h1 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h1><h2 id="一、文件、目录操作命令"><a href="#一、文件、目录操作命令" class="headerlink" title="一、文件、目录操作命令"></a>一、文件、目录操作命令</h2><h4 id="1、ls命令"><a href="#1、ls命令" class="headerlink" title="1、ls命令"></a>1、ls命令</h4><p>功能：显示文件和目录的信息<br>ls　以默认方式显示当前目录文件列表<br>ls -a 显示所有文件包括隐藏文件<br>ls -l 显示文件属性，包括大小，日期，符号连接，是否可读写及是否可执行<br>ls -lh 显示文件的大小，以容易理解的格式印出文件大小 (例如 1K 234M 2G)<br>ls -lt 显示文件，按照修改时间排序<br> ls -F 在列出的文件名和目录名后添加标志。例如，在可执行文件后添加“*”，在目录名后添加“/”以区分不同的类型。</p>
+<h4 id="2、cd命令"><a href="#2、cd命令" class="headerlink" title="2、cd命令"></a>2、cd命令</h4><p>功能：进入目录<br>cd dir　切换到当前目录下的dir目录<br>cd /　切换到根目录<br>cd ..　切换到到上一级目录<br>cd ../..　切换到上二级目录<br>cd ~　切换到用户目录，比如是root用户，则切换到/root下</p>
+<h4 id="3、cp命令"><a href="#3、cp命令" class="headerlink" title="3、cp命令"></a>3、cp命令</h4><p>功能：copy文件<br>cp source target　将文件source复制为target<br>cp /root /source .　将/root下的文件source复制到当前目录<br>cp –av soure_dir target_dir　将整个目录复制，两目录完全一样</p>
 <h4 id="4、rm命令"><a href="#4、rm命令" class="headerlink" title="4、rm命令"></a>4、rm命令</h4><p>功能：删除文件或目录<br>rm file　删除某一个文件<br>rm -f file 删除时候不进行提示。可以于r参数（递归删除）配合使用<br>rm -rf dir　删除当前目录下叫dir的整个目录</p>
 <h4 id="5、mv命令"><a href="#5、mv命令" class="headerlink" title="5、mv命令"></a>5、mv命令</h4><p>功能：将文件移动走，或者改名，在uinx下面没有改名的命令，如果想改名，可以使用该命令<br>mv source target　将文件source更名为target</p>
 <h4 id="6、diff"><a href="#6、diff" class="headerlink" title="6、diff"></a>6、diff</h4><p>功能：比较文件内容<br>diff dir1 dir2　比较目录1与目录2的文件列表是否相同，但不比较文件的实际内容，不同则列出<br>diff file1 file2　比较文件1与文件2的内容是否相同，如果是文本格式的文件，则将不相同的内容显示，如果是二进制代码则只表示两个文件是不同的<br>comm file1 file2　比较文件，显示两个文件不相同的内容</p>
 <h4 id="7、ln命令"><a href="#7、ln命令" class="headerlink" title="7、ln命令"></a>7、ln命令</h4><p>功能：建立链接。windows的快捷方式就是根据*inx下的链接的原理来做的<br>ln source_path target_path 硬连接<br>ln -s source_path target_path 软连接</p>
 <h2 id="二、查看文件内容命令"><a href="#二、查看文件内容命令" class="headerlink" title="二、查看文件内容命令"></a>二、查看文件内容命令</h2><h4 id="1、cat命令"><a href="#1、cat命令" class="headerlink" title="1、cat命令"></a>1、cat命令</h4><p>显示文件的内容，和DOS的type相同<br>cat file</p>
 <h4 id="2、more命令"><a href="#2、more命令" class="headerlink" title="2、more命令"></a>2、more命令</h4><p>功能：分页显示命令<br>more　file<br>more命令也可以通过管道符(|)与其他的命令一起使用,例如：<br>ps ux|more<br>ls|more</p>
-<h4 id="3、tail-命令"><a href="#3、tail-命令" class="headerlink" title="3、tail 命令"></a>3、tail 命令</h4><p>功能：显示文件的最后几行<br>tail -n 100 aaa.txt  显示文件aaa.txt文件的最后100行<br>tail -f &#x2F;var&#x2F;log&#x2F;messages  使tail不停地去读最新的内容，这样有实时监视的效果</p>
+<h4 id="3、tail-命令"><a href="#3、tail-命令" class="headerlink" title="3、tail 命令"></a>3、tail 命令</h4><p>功能：显示文件的最后几行<br>tail -n 100 aaa.txt  显示文件aaa.txt文件的最后100行<br>tail -f /var/log/messages  使tail不停地去读最新的内容，这样有实时监视的效果</p>
 <h4 id="4、vi命令"><a href="#4、vi命令" class="headerlink" title="4、vi命令"></a>4、vi命令</h4><p>vi file　编辑文件file<br>vi 原基本使用及命令：<br>在命令模式下，按一下”a”（”A”）键或者”i” （”I”）或者”o”（”O”）键，即进入插入态文本输入模式。在文本输入模式下，按Esc键，即回到命令模式。</p>
 <p>  按”a”键，插入到当前光标的后面；按”i”键，在当前光标处插入；按”A”键，在当前光 标所在行的最后插入；按”I”键，在当前光标所在行的开头插入。</p>
 <p> 退出Vi 的方式: 先按[ESC]键回到命令模式，然后输入:w(写入文件),:w!(不询问方式写入文件）,:wq保存并退出,:q退出,q!不保存退出,：x 该命令的功能同命令模式下的ZZ命令功能相同</p>
 <p>在命令模式中，连按两次大写字母Z，若当前编辑的文件曾被修改过，则Vi保存该文件后退出，返回到shell；若当前编辑的文件没被修改过，则Vi直接退出, 返回到shell。</p>
 <h4 id="5、touch命令"><a href="#5、touch命令" class="headerlink" title="5、touch命令"></a>5、touch命令</h4><p>功能：创建一个空文件<br>touch aaa.txt  创建一个空文件，文件名为aaa.txt</p>
 <h2 id="三、基本系统命令"><a href="#三、基本系统命令" class="headerlink" title="三、基本系统命令"></a>三、基本系统命令</h2><h4 id="1、man命令"><a href="#1、man命令" class="headerlink" title="1、man命令"></a>1、man命令</h4><p>功能：查看某个命令的帮助，如果你不知道某个命令的用法不懂，可以问他，他知道就回告诉你<br>例如：<br>man ls 显示ls命令的帮助内容</p>
-<h4 id="2、w命令"><a href="#2、w命令" class="headerlink" title="2、w命令"></a>2、w命令</h4><p>功能：显示登录用户的详细信息<br>例如：<br>[liujl@signal ~]$ w<br>16:51:13 up  4:20,  1 user,  load average: 0.00, 0.00, 0.00<br>USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT<br> root     pts&#x2F;0    192.168.56.1     12:31    0.00s  0.11s  0.00s w</p>
-<h4 id="3、who命令"><a href="#3、who命令" class="headerlink" title="3、who命令"></a>3、who命令</h4><p>功能：显示登录用户<br>例如：<br>[root@signal u01]# who<br>root     pts&#x2F;0        2016-03-21 12:31 (192.168.56.1)</p>
+<h4 id="2、w命令"><a href="#2、w命令" class="headerlink" title="2、w命令"></a>2、w命令</h4><p>功能：显示登录用户的详细信息<br>例如：<br>[liujl@signal ~]$ w<br>16:51:13 up  4:20,  1 user,  load average: 0.00, 0.00, 0.00<br>USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT<br> root     pts/0    192.168.56.1     12:31    0.00s  0.11s  0.00s w</p>
+<h4 id="3、who命令"><a href="#3、who命令" class="headerlink" title="3、who命令 　　"></a>3、who命令 　　</h4><p>功能：显示登录用户<br>例如：<br>[root@signal u01]# who<br>root     pts/0        2016-03-21 12:31 (192.168.56.1)</p>
 <h4 id="4、last命令"><a href="#4、last命令" class="headerlink" title="4、last命令"></a>4、last命令</h4><p>功能：查看最近那些用户登录系统</p>
 <p>例如：</p>
 <div class="hljs"><pre><code><pre><code class="hljs shell">[root@signal u01]# last
@@ -267,16 +267,15 @@
 
 
 
-wtmp begins Mon Jan 18 09:15:27 2016
-</code></pre>
+wtmp begins Mon Jan 18 09:15:27 2016</code></pre>
 <h4 id="5、date命令"><a href="#5、date命令" class="headerlink" title="5、date命令"></a>5、date命令</h4><p>功能：系统日期设定<br>date　显示当前日期时间<br>date -s 20:30:30　设置系统时间为20:30:30<br>date -s 2002-3-5　设置系统时期为2003-3-5<br>date -s “060520 06:00:00″　设置系统时期为2006年5月20日6点整。</p>
 <h4 id="6、clock命令"><a href="#6、clock命令" class="headerlink" title="6、clock命令"></a>6、clock命令</h4><p>功能：时钟设置<br>clock –r　对系统Bios中读取时间参数<br>clock –w　将系统时间(如由date设置的时间)写入Bios</p>
-<h4 id="7、uname命令"><a href="#7、uname命令" class="headerlink" title="7、uname命令"></a>7、uname命令</h4><p>功能：查看系统版本<br>uname -R　显示操作系统内核的version<br>例如：<br>[root@signal u01]# uname -a<br>Linux signal 2.6.32-358.el6.x86_64 #1 SMP Tue Jan 29 11:47:41 EST 2013 x86_64 x86_64 x86_64 GNU&#x2F;Linux</p>
+<h4 id="7、uname命令"><a href="#7、uname命令" class="headerlink" title="7、uname命令"></a>7、uname命令</h4><p>功能：查看系统版本<br>uname -R　显示操作系统内核的version<br>例如：<br>[root@signal u01]# uname -a<br>Linux signal 2.6.32-358.el6.x86_64 #1 SMP Tue Jan 29 11:47:41 EST 2013 x86_64 x86_64 x86_64 GNU/Linux</p>
 <h4 id="8、关闭和重新启动系统命令"><a href="#8、关闭和重新启动系统命令" class="headerlink" title="8、关闭和重新启动系统命令"></a>8、关闭和重新启动系统命令</h4><p>reboot　  重新启动计算机<br>shutdown -r now  重新启动计算机，停止服务后重新启动计算机<br>shutdown -h now  关闭计算机，停止服务后再关闭系统<br>halt   关闭计算机<br>一般用shutdown -r now,在重启系统是，关闭相关服务，shutdown -h now也是如此。</p>
 <h4 id="9、su命令"><a href="#9、su命令" class="headerlink" title="9、su命令"></a>9、su命令</h4><p>功能：切换用户<br>su -  切换到root用户</p>
 <p>su – liujl 切换到liujl用户，<br>注意：- ，他很关键，使用-，将使用用户的环境变量</p>
 <h2 id="四、监视系统状态命令"><a href="#四、监视系统状态命令" class="headerlink" title="四、监视系统状态命令"></a>四、监视系统状态命令</h2><h4 id="1、top命令"><a href="#1、top命令" class="headerlink" title="1、top命令"></a>1、top命令</h4><p>功能：实时显示系统中各个进程的资源占用状况</p>
-<h4 id="2、free命令"><a href="#2、free命令" class="headerlink" title="2、free命令"></a>2、free命令</h4><p>功能：查看内存和swap分区使用情况<br>例如：<br>[root@signal u01]# free -m<br>                 total       used       free     shared    buffers     cached<br>Mem:          1878        543       1335          0         54        285<br>    -&#x2F;+ buffers&#x2F;cache:        203       1675<br> Swap:         2047          0       2047</p>
+<h4 id="2、free命令"><a href="#2、free命令" class="headerlink" title="2、free命令"></a>2、free命令</h4><p>功能：查看内存和swap分区使用情况<br>例如：<br>[root@signal u01]# free -m<br>                 total       used       free     shared    buffers     cached<br>Mem:          1878        543       1335          0         54        285<br>    -/+ buffers/cache:        203       1675<br> Swap:         2047          0       2047</p>
 <h4 id="3、uptime"><a href="#3、uptime" class="headerlink" title="3、uptime"></a>3、uptime</h4><p>功能：现在的时间 ，系统开机运转到现在经过的时间，连线的使用者数量，最近一分钟，五分钟和十五分钟的系统负载<br>例如：</p>
 <div class="hljs"><pre><code class="hljs shell">[root@signal u01]# uptime
 16:56:04 up  4:24,  1 user,  load average: 0.00, 0.00, 0.00</code></pre></div>
@@ -284,31 +283,31 @@ wtmp begins Mon Jan 18 09:15:27 2016
 <h4 id="4、vmstat命令"><a href="#4、vmstat命令" class="headerlink" title="4、vmstat命令"></a>4、vmstat命令</h4><p>功能：监视虚拟内存使用情况<br>例如：<br>[root@signal u01]# vmstat<br>procs ———–memory———- —swap– —–io—- –system– —–cpu—–<br>r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st<br> 0  0      0 1367156  55808 292620    0    0    22     3   12   13  0  0 98  1  0</p>
 <h4 id="5、ps命令"><a href="#5、ps命令" class="headerlink" title="5、ps命令"></a>5、ps命令</h4><p>功能：显示进程信息<br>ps ux 显示当前用户的进程<br>ps uxwww 显示当前用户的进程的详细信息<br>ps aux 显示所有用户的进程<br>ps ef 显示系统所有进程信息</p>
 <h4 id="6、kill命令"><a href="#6、kill命令" class="headerlink" title="6、kill命令"></a>6、kill命令</h4><p>功能：干掉某个进程，进程号可以通过ps命令得到<br>kill -9 1001　将进程编号为1001的程序干掉<br>kill all -9 apache　将所有名字为apapche的程序杀死，kill不是万能的，对僵死的程序则无效。<br>kill -STOP [pid]    发送SIGSTOP (17,19,23)停止一个进程，而并不消灭这个进程。<br>kill -CONT [pid]    发送SIGCONT (19,18,25)重新开始一个停止的进程。<br>kill -KILL [pid]    发送SIGKILL (9)强迫进程立即停止，并且不实施清理操作。<br>kill -9 -1   终止你拥有的全部进程。<br>SIGKILL和SIGSTOP信号不能被捕捉、封锁或者忽略，但是，其它的信号可以</p>
-<h2 id="五、磁盘操作命令"><a href="#五、磁盘操作命令" class="headerlink" title="五、磁盘操作命令"></a>五、磁盘操作命令</h2><h4 id="1、df命令"><a href="#1、df命令" class="headerlink" title="1、df命令"></a>1、df命令</h4><p>功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。<br>参数 功能<br>-a 列出全部目录<br>-Ta 列出全部目录，并且显示文件类型<br>-B 显示块信息<br>-i 以i节点列出全部目录<br>-h 按照日常习惯显示（如：1K、100M、20G）<br>-x [filesystype] 不显示[filesystype]<br>例如：<br>[root@signal u01]# df -Th<br>Filesystem    Type    Size  Used Avail Use% Mounted on<br>&#x2F;dev&#x2F;sda3     ext4     23G   14G  8.0G  63% &#x2F;<br>tmpfs        tmpfs    940M   72K  940M   1% &#x2F;dev&#x2F;shm<br>&#x2F;dev&#x2F;sda1     ext4    194M   32M  153M  18% &#x2F;boot</p>
+<h2 id="五、磁盘操作命令"><a href="#五、磁盘操作命令" class="headerlink" title="五、磁盘操作命令"></a>五、磁盘操作命令</h2><h4 id="1、df命令"><a href="#1、df命令" class="headerlink" title="1、df命令"></a>1、df命令</h4><p>功能：检查文件系统的磁盘空间占用情况。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。<br>参数 功能<br>-a 列出全部目录<br>-Ta 列出全部目录，并且显示文件类型<br>-B 显示块信息<br>-i 以i节点列出全部目录<br>-h 按照日常习惯显示（如：1K、100M、20G）<br>-x [filesystype] 不显示[filesystype]<br>例如：<br>[root@signal u01]# df -Th<br>Filesystem    Type    Size  Used Avail Use% Mounted on<br>/dev/sda3     ext4     23G   14G  8.0G  63% /<br>tmpfs        tmpfs    940M   72K  940M   1% /dev/shm<br>/dev/sda1     ext4    194M   32M  153M  18% /boot</p>
 <h4 id="2、du命令"><a href="#2、du命令" class="headerlink" title="2、du命令"></a>2、du命令</h4><p>功能：检测一个目录和（递归地）所有它的子目录中的文件占用的磁盘空间。<br>参数  功能<br>-s [dirName] 显示目录占用总空间<br>-sk [dirName] 显示目录占用总空间，以k为单位<br>-sb [dirName] 显示目录占用总空间，以b为单位<br>-sm [dirName] 显示目录占用总空间，以m为单位<br>-sc [dirName] 显示目录占用总空间，加上目录统计<br>-sh [dirName] 只统计目录大小</p>
 <p>例如：<br>[root@signal u01]# du -sh app<br>5.8G    app</p>
-<h4 id="3、mount命令"><a href="#3、mount命令" class="headerlink" title="3、mount命令"></a>3、mount命令</h4><p>功能：使用mount命令就可在Linux中挂载各种文件系统。<br>格式：mount -t &lt;文件系统&gt; 设备名 挂载点<br>(1)mount &#x2F;dev&#x2F;sda1  &#x2F;mnt&#x2F;filetest<br>mount -t vfat &#x2F;dev&#x2F;hda  &#x2F;mnt&#x2F;fatfile<br>mount -t ntfs &#x2F;dev&#x2F;hda  &#x2F;mnt&#x2F;ntfsfile<br>mount -t iso9660 &#x2F;dev&#x2F;cdrom  &#x2F;mnt&#x2F;cdrom<br>mount -o &lt;选项&gt; 设备名 挂载点</p>
-<p>(2)使用usb设备<br>modprobe usb-storage<br>mkdir &#x2F;mnt&#x2F;usb<br>mount -t auto &#x2F;dev&#x2F;sdx1 &#x2F;mnt&#x2F;usb<br>umount &#x2F;mnt&#x2F;usb</p>
-<h4 id="4、mkswap命令"><a href="#4、mkswap命令" class="headerlink" title="4、mkswap命令"></a>4、mkswap命令</h4><p>功能：使用mkswap命令可以创建swap空间，如：<br>debian:<del># mkswap -c &#x2F;dev&#x2F;hda4<br>debian:</del># swapon &#x2F;dev&#x2F;hda4      #启用新创建的swap空间，停用可使用swapoff命令</p>
-<h4 id="5、fdisk命令"><a href="#5、fdisk命令" class="headerlink" title="5、fdisk命令"></a>5、fdisk命令</h4><p>功能：对磁盘进行分区<br>fdisk &#x2F;dev&#x2F;xxx 格式化xxx设备(xxx是指磁盘驱动器的名字，例如hdb，sdc)<br>fdisk -l 显示磁盘的分区表</p>
-<h4 id="6、mkfs命令"><a href="#6、mkfs命令" class="headerlink" title="6、mkfs命令"></a>6、mkfs命令</h4><p>功能：格式化文件系统，可以指定文件系统的类型，如ext2、ext3、fat、ntfs等<br>格式1：mkfs.ext3 options &#x2F;dev&#x2F;xxx<br>格式2：mkfs -t ext2 options &#x2F;dev&#x2F;xxx<br>参数   功能<br>-b &lt;1024|2048|4096&gt; 块大小<br>-i <number>  节点大写<br>-m <number>  预留管理空间大小<br>例如：<br>debian:~#mkfs.ext4 &#x2F;dev&#x2F;sdb1</p>
-<h4 id="7、e2fsck命令"><a href="#7、e2fsck命令" class="headerlink" title="7、e2fsck命令"></a>7、e2fsck命令</h4><p>功能：磁盘检测<br>e2fsck &#x2F;dev&#x2F;hda1　检查&#x2F;dev&#x2F;hda1是否有文件系统错误，提示修复方式<br>e2fsck -p &#x2F;dev&#x2F;hda1　检查&#x2F;dev&#x2F;hda1是否有错误，如果有则自动修复<br>e2fsck -y &#x2F;dev&#x2F;hda1　检查错误，所有提问均于yes方式执行<br>e2fsck -c &#x2F;dev&#x2F;hda1　检查磁盘是否有坏区</p>
-<h4 id="8、tune2fs命令"><a href="#8、tune2fs命令" class="headerlink" title="8、tune2fs命令"></a>8、tune2fs命令</h4><p>功能：调整ext2&#x2F;ext3文件的参数<br>参数  功能<br>-l <device> 查看文件系统信息<br>-c <count> 设置强制自检的挂载次数<br>-i <n day> 设置强制自检的间隔时间，单位天<br>-m <percentage> 保留块的百分比<br>-j  将ext2文件系统转换成ext3格式</p>
-<p>tune2fs -l &#x2F;dev&#x2F;sda1</p>
-<h4 id="9、dd命令"><a href="#9、dd命令" class="headerlink" title="9、dd命令"></a>9、dd命令</h4><p>功能：把指定的输入文件拷贝到指定的输出文件中，并且在拷贝过程中可以进行格式转换。<br>跟DOS下的diskcopy命令的作用类似。<br>dd if&#x3D;&#x2F;dev&#x2F;fd0 of&#x3D;floppy.img　将软盘的内容复制成一个镜像<br>dd if&#x3D;floppy.img of&#x3D;&#x2F;dev&#x2F;fd0　将一个镜像的内容复制到软盘，做驱动盘的时候经常用。</p>
+<h4 id="3、mount命令"><a href="#3、mount命令" class="headerlink" title="3、mount命令"></a>3、mount命令</h4><p>功能：使用mount命令就可在Linux中挂载各种文件系统。<br>格式：mount -t &lt;文件系统&gt; 设备名 挂载点<br>(1)mount /dev/sda1  /mnt/filetest<br>mount -t vfat /dev/hda  /mnt/fatfile<br>mount -t ntfs /dev/hda  /mnt/ntfsfile<br>mount -t iso9660 /dev/cdrom  /mnt/cdrom<br>mount -o &lt;选项&gt; 设备名 挂载点</p>
+<p>(2)使用usb设备<br>modprobe usb-storage<br>mkdir /mnt/usb<br>mount -t auto /dev/sdx1 /mnt/usb<br>umount /mnt/usb</p>
+<h4 id="4、mkswap命令"><a href="#4、mkswap命令" class="headerlink" title="4、mkswap命令"></a>4、mkswap命令</h4><p>功能：使用mkswap命令可以创建swap空间，如：<br>debian:<del># mkswap -c /dev/hda4<br>debian:</del># swapon /dev/hda4      #启用新创建的swap空间，停用可使用swapoff命令</p>
+<h4 id="5、fdisk命令"><a href="#5、fdisk命令" class="headerlink" title="5、fdisk命令"></a>5、fdisk命令</h4><p>功能：对磁盘进行分区<br>fdisk /dev/xxx 格式化xxx设备(xxx是指磁盘驱动器的名字，例如hdb，sdc)<br>fdisk -l 显示磁盘的分区表</p>
+<h4 id="6、mkfs命令"><a href="#6、mkfs命令" class="headerlink" title="6、mkfs命令"></a>6、mkfs命令</h4><p>功能：格式化文件系统，可以指定文件系统的类型，如ext2、ext3、fat、ntfs等<br>格式1：mkfs.ext3 options /dev/xxx<br>格式2：mkfs -t ext2 options /dev/xxx<br>参数   功能<br>-b &lt;1024|2048|4096&gt; 块大小<br>-i <number>  节点大写<br>-m <number>  预留管理空间大小<br>例如：<br>debian:~#mkfs.ext4 /dev/sdb1</p>
+<h4 id="7、e2fsck命令"><a href="#7、e2fsck命令" class="headerlink" title="7、e2fsck命令"></a>7、e2fsck命令</h4><p>功能：磁盘检测<br>e2fsck /dev/hda1　检查/dev/hda1是否有文件系统错误，提示修复方式<br>e2fsck -p /dev/hda1　检查/dev/hda1是否有错误，如果有则自动修复<br>e2fsck -y /dev/hda1　检查错误，所有提问均于yes方式执行<br>e2fsck -c /dev/hda1　检查磁盘是否有坏区</p>
+<h4 id="8、tune2fs命令"><a href="#8、tune2fs命令" class="headerlink" title="8、tune2fs命令"></a>8、tune2fs命令</h4><p>功能：调整ext2/ext3文件的参数<br>参数  功能<br>-l <device> 查看文件系统信息<br>-c <count> 设置强制自检的挂载次数<br>-i <n day> 设置强制自检的间隔时间，单位天<br>-m <percentage> 保留块的百分比<br>-j  将ext2文件系统转换成ext3格式</p>
+<p>tune2fs -l /dev/sda1</p>
+<h4 id="9、dd命令"><a href="#9、dd命令" class="headerlink" title="9、dd命令"></a>9、dd命令</h4><p>功能：把指定的输入文件拷贝到指定的输出文件中，并且在拷贝过程中可以进行格式转换。<br>跟DOS下的diskcopy命令的作用类似。<br>dd if=/dev/fd0 of=floppy.img　将软盘的内容复制成一个镜像<br>dd if=floppy.img of=/dev/fd0　将一个镜像的内容复制到软盘，做驱动盘的时候经常用。</p>
 <h2 id="六、用户和组相关命令"><a href="#六、用户和组相关命令" class="headerlink" title="六、用户和组相关命令"></a>六、用户和组相关命令</h2><h4 id="1、groupadd命令"><a href="#1、groupadd命令" class="headerlink" title="1、groupadd命令"></a>1、groupadd命令</h4><p>　　功能：添加组<br>　　groupadd dba  添加dba组<br>　　groupadd -g 1001 dba  添加dba组，组id为1001</p>
-<h4 id="2、useradd命令"><a href="#2、useradd命令" class="headerlink" title="2、useradd命令"></a>2、useradd命令</h4><p>功能：添加用户<br>　　useradd liujl  添加用户，home为&#x2F;home&#x2F;user1，组为user1<br>　　useradd -g dba -m -d &#x2F;home&#x2F;liujl liujl 添加用户liujl，home为&#x2F;home&#x2F;liujl，组为liujl<br>　　user list　显示已登陆的用户列表</p>
+<h4 id="2、useradd命令"><a href="#2、useradd命令" class="headerlink" title="2、useradd命令"></a>2、useradd命令</h4><p>功能：添加用户<br>　　useradd liujl  添加用户，home为/home/user1，组为user1<br>　　useradd -g dba -m -d /home/liujl liujl 添加用户liujl，home为/home/liujl，组为liujl<br>　　user list　显示已登陆的用户列表</p>
 <h4 id="3、passwd命令"><a href="#3、passwd命令" class="headerlink" title="3、passwd命令"></a>3、passwd命令</h4><p>功能：更改用户密码<br>　　passwd liujl　修改用户user1的密码<br>　　passwd -d root　将root用户的密码删除</p>
 <h4 id="4、userdel命令"><a href="#4、userdel命令" class="headerlink" title="4、userdel命令"></a>4、userdel命令</h4><p>功能：删除用户<br>　　userdel liujl　删除liujl用户</p>
-<h4 id="5、chown命令"><a href="#5、chown命令" class="headerlink" title="5、chown命令"></a>5、chown命令</h4><p>功能：改变文件或目录的所有者<br>　　chown liujl &#x2F;dir　将&#x2F;dir目录设置为user1所有<br>　　chown -R liujl:dba &#x2F;dir　将&#x2F;dir目录下所有文件和目录，设置为liujl所有,组为dba。-R递归到下面的每个文件和目录</p>
-<h4 id="6、chgrp命令"><a href="#6、chgrp命令" class="headerlink" title="6、chgrp命令"></a>6、chgrp命令</h4><p>功能：改变文件或目录的所有组<br>　　chgrp dba &#x2F;dir　将&#x2F;dir目录设置为dba所有</p>
+<h4 id="5、chown命令"><a href="#5、chown命令" class="headerlink" title="5、chown命令"></a>5、chown命令</h4><p>功能：改变文件或目录的所有者<br>　　chown liujl /dir　将/dir目录设置为user1所有<br>　　chown -R liujl:dba /dir　将/dir目录下所有文件和目录，设置为liujl所有,组为dba。-R递归到下面的每个文件和目录</p>
+<h4 id="6、chgrp命令"><a href="#6、chgrp命令" class="headerlink" title="6、chgrp命令"></a>6、chgrp命令</h4><p>功能：改变文件或目录的所有组<br>　　chgrp dba /dir　将/dir目录设置为dba所有</p>
 <h4 id="7、chmod命令"><a href="#7、chmod命令" class="headerlink" title="7、chmod命令"></a>7、chmod命令</h4><p>功能：改变用户的权限<br>　　chmod a+x file　将file文件设置为可执行，脚本类文件一定要这样设置一个，否则得用bash file才能执行<br>　　chmod 666 file　将文件file设置为可读写<br>　　chmod 750 file 将文件file设置为，所有者为完全权限，同组可以读和执行，其他无权限</p>
 <h4 id="8、id命令"><a href="#8、id命令" class="headerlink" title="8、id命令"></a>8、id命令</h4><p>功能：显示用户的信息，包括uid、gid等</p>
 <p>id liujl</p>
-<p>uid&#x3D;1002(liujl) gid&#x3D;1002(liujl) groups&#x3D;1002(liujl)</p>
+<p>uid=1002(liujl) gid=1002(liujl) groups=1002(liujl)</p>
 <h4 id="9、finger命令"><a href="#9、finger命令" class="headerlink" title="9、finger命令"></a>9、finger命令</h4><p>功能：显示用户的信息<br>注意：debian下没有该命令。</p>
 <p>finger liujl</p>
-<p>　　Login: liujl                           Name:<br>　　Directory: &#x2F;home&#x2F;liujl                 Shell: &#x2F;bin&#x2F;bash<br>　　On since Mon Mar 21 07:59 (CST) on pts&#x2F;0 from 192.168.56.10<br>　　No mail.<br>　　No Plan.</p>
+<p>　　Login: liujl                           Name:<br>　　Directory: /home/liujl                 Shell: /bin/bash<br>　　On since Mon Mar 21 07:59 (CST) on pts/0 from 192.168.56.10<br>　　No mail.<br>　　No Plan.</p>
 <h2 id="七、压缩命令"><a href="#七、压缩命令" class="headerlink" title="七、压缩命令"></a>七、压缩命令</h2><h4 id="1、gzip格式命令"><a href="#1、gzip格式命令" class="headerlink" title="1、gzip格式命令"></a>1、gzip格式命令</h4><p>功能：压缩文件，gz格式的<br>注意：生成的文件会把源文件覆盖<br>　　gzip -v <filename> 压缩文件，并且显示进度<br>　　-d <filename> 解压缩<br>　　gnuzip  -f <filename> 解压缩<br>例如：</p>
 <p>gzip 1.sh</p>
 <p>　　#ll<br>　　-rw-r–r–. 1 root   root       25 Mar 21 17:10 1.sh.gz</p>
@@ -339,19 +338,19 @@ wtmp begins Mon Jan 18 09:15:27 2016
 <p>netstat -nr</p>
 <p>　　Kernel IP routing table<br>　　Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface<br>　　192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 eth0<br>　　169.254.0.0     0.0.0.0         255.255.0.0     U         0 0          0 eth0<br>　　0.0.0.0         192.168.1.254   0.0.0.0         UG        0 0          0 eth0</p>
 <h4 id="3、netstat命令"><a href="#3、netstat命令" class="headerlink" title="3、netstat命令"></a>3、netstat命令</h4><p>功能：显示网络状态<br>　　netstat -an  查看网络端口信息<br>　　netstat -nr 查看路由表信息，比route快多了<br>　　-t: 显示TCP链接信息<br>　　-u: 显示UDP链接信息<br>　　-l: 显示监听状态的端口<br>　　-n: 直接显示ip，不做名称转换<br>　　-p: 显示相应的进程PID以及名称（要root权限）<br>　　如果要查看关于sockets更详细占用信息等，可以使用lsof工具。</p>
-<h4 id="4、启动网络的命令"><a href="#4、启动网络的命令" class="headerlink" title="4、启动网络的命令"></a>4、启动网络的命令</h4><p>redhat族的命令:<br>　　&#x2F;etc&#x2F;init.d&#x2F;network<br>　　debian命令:<br>　　&#x2F;etc&#x2F;init.d&#x2F;networking<br>例如：<br>　　&#x2F;etc&#x2F;init.d&#x2F;network stop 停止网络，<br>　　&#x2F;etc&#x2F;init.d&#x2F;network start 启动网络，</p>
-<h4 id="5、手工修改网络配置"><a href="#5、手工修改网络配置" class="headerlink" title="5、手工修改网络配置"></a>5、手工修改网络配置</h4><p><strong>(1)、debian系统</strong><br>配置文件位置为：&#x2F;etc&#x2F;network&#x2F;interfaces</p>
+<h4 id="4、启动网络的命令"><a href="#4、启动网络的命令" class="headerlink" title="4、启动网络的命令"></a>4、启动网络的命令</h4><p>redhat族的命令:<br>　　/etc/init.d/network<br>　　debian命令:<br>　　/etc/init.d/networking<br>例如：<br>　　/etc/init.d/network stop 停止网络，<br>　　/etc/init.d/network start 启动网络，</p>
+<h4 id="5、手工修改网络配置"><a href="#5、手工修改网络配置" class="headerlink" title="5、手工修改网络配置"></a>5、手工修改网络配置</h4><p><strong>(1)、debian系统</strong><br>配置文件位置为：/etc/network/interfaces</p>
 <p>The loopback network interface</p>
 <p>　　auto lo<br>　　iface lo inet loopback</p>
 <p>The primary network interface</p>
-<p>　　auto eth0 eth1<br>　　iface eth0 inet static<br>　　address 10.4.5.6<br>　　netmask 255.255.255.0<br>　　network 10.4.5.0<br>　　broadcast 10.4.5.255<br>　　iface eth1 inet static<br>　　address 219.25.5.60<br>　　netmask 255.255.255.192<br>　　network 219.25.5.0<br>　　broadcast 219.25.5.63<br>　　gateway 219.25.5.30<br>　　修改后保存配置后，运行<br>　　&#x2F;etc&#x2F;init.d&#x2F;networking restart<br>　　网络配置就改变了</p>
-<p><strong>(2)、redhat系统</strong><br>　　配置文件位置为：&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-eth0<br>　　DEVICE&#x3D;eth0<br>　　BOOTPROTO&#x3D;static<br>　　BROADCAST&#x3D;192.168.1.255<br>　　IPADDR&#x3D;192.168.1.5<br>　　NETMASK&#x3D;255.255.255.0<br>　　NETWORK&#x3D;192.168.1.0<br>　　GATEWAY&#x3D;192.168.1.254<br>　　ONBOOT&#x3D;yes<br>　　TYPE&#x3D;Ethernet<br>　　修改后保存配置后，运行<br>　　&#x2F;etc&#x2F;init.d&#x2F;network restart<br>　　或者<br>　　service network restart<br>　　网络配置就改变了。<br>　　默认DNS的文件的位置为：&#x2F;etc&#x2F;resolv.conf<br>　　#cat &#x2F;etc&#x2F;resolv.conf<br>　　search test.com.cn<br>　　nameserver 192.168.1.11</p>
+<p>　　auto eth0 eth1<br>　　iface eth0 inet static<br>　　address 10.4.5.6<br>　　netmask 255.255.255.0<br>　　network 10.4.5.0<br>　　broadcast 10.4.5.255<br>　　iface eth1 inet static<br>　　address 219.25.5.60<br>　　netmask 255.255.255.192<br>　　network 219.25.5.0<br>　　broadcast 219.25.5.63<br>　　gateway 219.25.5.30<br>　　修改后保存配置后，运行<br>　　/etc/init.d/networking restart<br>　　网络配置就改变了</p>
+<p><strong>(2)、redhat系统</strong><br>　　配置文件位置为：/etc/sysconfig/network-scripts/ifcfg-eth0<br>　　DEVICE=eth0<br>　　BOOTPROTO=static<br>　　BROADCAST=192.168.1.255<br>　　IPADDR=192.168.1.5<br>　　NETMASK=255.255.255.0<br>　　NETWORK=192.168.1.0<br>　　GATEWAY=192.168.1.254<br>　　ONBOOT=yes<br>　　TYPE=Ethernet<br>　　修改后保存配置后，运行<br>　　/etc/init.d/network restart<br>　　或者<br>　　service network restart<br>　　网络配置就改变了。<br>　　默认DNS的文件的位置为：/etc/resolv.conf<br>　　#cat /etc/resolv.conf<br>　　search test.com.cn<br>　　nameserver 192.168.1.11</p>
 <h4 id="6、网络排错"><a href="#6、网络排错" class="headerlink" title="6、网络排错"></a>6、网络排错</h4><p><strong>(1)、ping命令</strong><br>　　功能：不说了，不知道就用干这行了。<br>　　ping <a target="_blank" rel="noopener" href="http://www.163.com/">www.163.com</a><br><strong>(2)、traceroute命令</strong></p>
 <p>　　功能：路由跟踪<br>　　traceroute <a target="_blank" rel="noopener" href="http://www.163.com/">www.163.com</a><br>　　traceroute 207.68.173.7</p>
 <p><strong>(3)、nslookup命令</strong></p>
 <p>　　功能：域名解析排错<br>　　例如：<br>　　$ nslookup</p>
-<h2 id="九、其他命令"><a href="#九、其他命令" class="headerlink" title="九、其他命令"></a>九、其他命令</h2><h4 id="1、ssh命令"><a href="#1、ssh命令" class="headerlink" title="1、ssh命令"></a>1、ssh命令</h4><p>功能：远程登陆到其他UNIX主机<br>　　ssh -l user1 192.168.1.2 使用用户名user1登陆到192.168.1.2<br>　　ssh <a href="mailto:&#x75;&#x73;&#101;&#x72;&#x31;&#64;&#x31;&#57;&#50;&#46;&#49;&#54;&#56;&#46;&#x31;&#46;&#50;">&#x75;&#x73;&#101;&#x72;&#x31;&#64;&#x31;&#57;&#50;&#46;&#49;&#54;&#56;&#46;&#x31;&#46;&#50;</a>   使用用户名user1登陆到192.168.1.2</p>
-<h4 id="2、scp命令"><a href="#2、scp命令" class="headerlink" title="2、scp命令"></a>2、scp命令</h4><p>功能：安全copy<br>例如：<br>　　scp abc.tar.gz <a href="mailto:&#x75;&#x73;&#101;&#x72;&#x31;&#x40;&#49;&#57;&#x32;&#46;&#49;&#54;&#x38;&#46;&#49;&#46;&#53;">&#x75;&#x73;&#101;&#x72;&#x31;&#x40;&#49;&#57;&#x32;&#46;&#49;&#54;&#x38;&#46;&#49;&#46;&#53;</a>:~ 将本地的abc.tar.gz 复制到 192.168.1.5的user1用户的根(&#x2F;home&#x2F;user1)下。</p>
+<h2 id="九、其他命令"><a href="#九、其他命令" class="headerlink" title="九、其他命令"></a>九、其他命令</h2><h4 id="1、ssh命令"><a href="#1、ssh命令" class="headerlink" title="1、ssh命令"></a>1、ssh命令</h4><p>功能：远程登陆到其他UNIX主机<br>　　ssh -l user1 192.168.1.2 使用用户名user1登陆到192.168.1.2<br>　　ssh <a href="mailto:&#x75;&#x73;&#x65;&#114;&#49;&#x40;&#49;&#57;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#49;&#46;&#x32;">&#x75;&#x73;&#x65;&#114;&#49;&#x40;&#49;&#57;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#49;&#46;&#x32;</a>   使用用户名user1登陆到192.168.1.2</p>
+<h4 id="2、scp命令"><a href="#2、scp命令" class="headerlink" title="2、scp命令"></a>2、scp命令</h4><p>功能：安全copy<br>例如：<br>　　scp abc.tar.gz <a href="mailto:&#117;&#115;&#x65;&#x72;&#49;&#64;&#49;&#x39;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#x31;&#46;&#53;">&#117;&#115;&#x65;&#x72;&#49;&#64;&#49;&#x39;&#x32;&#46;&#x31;&#54;&#x38;&#46;&#x31;&#46;&#53;</a>:~ 将本地的abc.tar.gz 复制到 192.168.1.5的user1用户的根(/home/user1)下。</p>
 <h4 id="3、telnet命令"><a href="#3、telnet命令" class="headerlink" title="3、telnet命令"></a>3、telnet命令</h4><p>功能：登陆到远程主机<br>例如：</p>
 <p>　　telnet 192.168.1.5</p>
 
@@ -363,7 +362,7 @@ wtmp begins Mon Jan 18 09:15:27 2016
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

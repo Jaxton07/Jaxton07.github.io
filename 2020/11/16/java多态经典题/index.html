@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -227,17 +227,17 @@
             <h1 style="display: none">Java多态经典题</h1>
             
             <div class="markdown-body">
-              <h1 id="Java多态经典题"><a href="#Java多态经典题" class="headerlink" title="Java多态经典题"></a>Java多态经典题</h1><p>​		之前看过几次多态的题，当时感觉搞清楚了，但是过一段时间感觉又模糊不确定了，所以记录一下，而且后来在项目中有涉及相关的内容，应该会有更深的体会。</p>
+              <h1 id="Java多态经典题"><a href="#Java多态经典题" class="headerlink" title="Java多态经典题"></a>Java多态经典题</h1><p>​        之前看过几次多态的题，当时感觉搞清楚了，但是过一段时间感觉又模糊不确定了，所以记录一下，而且后来在项目中有涉及相关的内容，应该会有更深的体会。</p>
 <p><strong>题目：</strong></p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">package</span> test.经典多态案例;
 
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestDuoTai</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
-        <span class="hljs-type">A</span> <span class="hljs-variable">a1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();
-        <span class="hljs-type">A</span> <span class="hljs-variable">a2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();
-        <span class="hljs-type">B</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();
-        <span class="hljs-type">C</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">C</span>();
-        <span class="hljs-type">D</span> <span class="hljs-variable">d</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">D</span>();
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestDuoTai</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        A a1 = <span class="hljs-keyword">new</span> A();
+        A a2 = <span class="hljs-keyword">new</span> B();
+        B b = <span class="hljs-keyword">new</span> B();
+        C c = <span class="hljs-keyword">new</span> C();
+        D d = <span class="hljs-keyword">new</span> D();
 
         System.out.println(<span class="hljs-string">&quot;1--&quot;</span> + a1.show(b) + <span class="hljs-string">&quot;  &quot;</span> + System.identityHashCode(a1));      		  <span class="hljs-comment">// 为什么会向上找</span>
         System.out.println(<span class="hljs-string">&quot;2--&quot;</span> + a1.show(c));
@@ -267,25 +267,25 @@
     &#125;
 &#125;
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;
-    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">(D obj)</span> &#123;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">show</span><span class="hljs-params">(D obj)</span> </span>&#123;
         <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;A and D&quot;</span>);
     &#125;
 
-    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">(A obj)</span> &#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">show</span><span class="hljs-params">(A obj)</span> </span>&#123;
         <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;A and A&quot;</span>);
     &#125;
 
 &#125;
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span> &#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">A</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> num1 = <span class="hljs-number">10</span>;
 
-    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">(B obj)</span> &#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">show</span><span class="hljs-params">(B obj)</span> </span>&#123;
         <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;B and B&quot;</span>);
     &#125;
 
-    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">show</span><span class="hljs-params">(A obj)</span> &#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">show</span><span class="hljs-params">(A obj)</span> </span>&#123;
         <span class="hljs-keyword">return</span> (<span class="hljs-string">&quot;B and A&quot;</span>);
     &#125;
 
@@ -300,10 +300,10 @@
 <span class="hljs-comment">     */</span>
 &#125;
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">B</span> &#123;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">B</span> </span>&#123;
 &#125;
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">D</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">B</span> &#123;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">D</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">B</span> </span>&#123;
 &#125;
 </code></pre></div>
 
@@ -323,7 +323,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

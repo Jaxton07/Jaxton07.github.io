@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      269 字
+      272 字
     </span>
   
 
@@ -252,7 +252,7 @@
 
 
 <h3 id="2、配置"><a href="#2、配置" class="headerlink" title="2、配置"></a>2、配置</h3><h5 id="1、修改密码"><a href="#1、修改密码" class="headerlink" title="1、修改密码"></a>1、修改密码</h5><p>在安装过程中我们并没有遇到设置密码的请求，可以查看mysql的初始密码，用来登陆mysql：</p>
-<div class="hljs"><pre><code class="hljs shel">sudo cat /etc/mysql/debian.cnf</code></pre></div>
+<div class="hljs"><pre><code class="hljs shel">sudo cat &#x2F;etc&#x2F;mysql&#x2F;debian.cnf</code></pre></div>
 
 
 
@@ -262,7 +262,7 @@
 
 <p>可能会要求先输入 root 用户密码，再输入刚才的mysql默认密码进行登陆。</p>
 <p>然后在MySQL中修改密码，执行：</p>
-<div class="hljs"><pre><code class="hljs shel">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;root&#x27;</code></pre></div>
+<div class="hljs"><pre><code class="hljs shel">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;root&#39;</code></pre></div>
 
 <p>后面一个 root 就是新密码。</p>
 <p>PS：没有找到初始密码直接执行命令：sudo mysql你会发现直接进入MySQL了，当然该命令只有第一次有效，改了密码之后就没用了。</p>
@@ -275,7 +275,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

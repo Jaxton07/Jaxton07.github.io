@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      882 字
+      883 字
     </span>
   
 
@@ -258,15 +258,15 @@ passwd：已成功更新密码
 
 
 <p>这样在创建用户名时，就创建了用户的主目录以及密码。</p>
-<p>默认情况下：<br>adduser在创建用户时会主动调用 &#x2F;etc&#x2F;adduser.conf；<br>在创建用户主目录时默认在&#x2F;home下，而且创建为 &#x2F;home&#x2F;用户名</p>
+<p>默认情况下：<br>adduser在创建用户时会主动调用 /etc/adduser.conf；<br>在创建用户主目录时默认在/home下，而且创建为 /home/用户名</p>
 <p>如果主目录已经存在，就不再创建，但是此主目录虽然作为新用户的主目录，而且默认登录时会进入这个目录下，但是这个目录并不是属于新用户，当使用userdel删除新用户时，并不会删除这个主目录，因为这个主目录在创建前已经存在且并不属于这个用户。</p>
-<p>为用户指定shell版本为：&#x2F;bin&#x2F;bash<br>因此常用参数选项为：</p>
+<p>为用户指定shell版本为：/bin/bash<br>因此常用参数选项为：</p>
 <ol>
-<li>–home： 指定创建主目录的路径，默认是在&#x2F;home目录下创建用户名同名的目录，这里可以指定；如果主目录同名目录存在，则不再创建，仅在登录时进入主目录。</li>
+<li>–home： 指定创建主目录的路径，默认是在/home目录下创建用户名同名的目录，这里可以指定；如果主目录同名目录存在，则不再创建，仅在登录时进入主目录。</li>
 <li>–quiet： 即只打印警告和错误信息，忽略其他信息。</li>
 <li>–debug： 定位错误信息。</li>
 <li>–conf： 在创建用户时使用指定的configuration文件。</li>
-<li>–force-badname： 默认在创建用户时会进行&#x2F;etc&#x2F;adduser.conf中的正则表达式检查用户名是否合法，如果想使用弱检查，则使用这个选项，如果不想检查，可以将&#x2F;etc&#x2F;adduser.conf中相关选项屏蔽。</li>
+<li>–force-badname： 默认在创建用户时会进行/etc/adduser.conf中的正则表达式检查用户名是否合法，如果想使用弱检查，则使用这个选项，如果不想检查，可以将/etc/adduser.conf中相关选项屏蔽。</li>
 </ol>
 <p><img src="https://github.com/EriWang520/images/blob/main/img/image-20210105132008777.png" srcset="/img/loading.gif" alt="image-20210105132008777"></p>
 <h3 id="1-2-useradd"><a href="#1-2-useradd" class="headerlink" title="1.2 useradd"></a>1.2 useradd</h3><p>一般不怎么用这个，用到了再补。</p>
@@ -274,7 +274,7 @@ passwd：已成功更新密码
 <div class="hljs"><pre><code class="hljs she">sudo deluser tt</code></pre></div>
 
 <p>输出显示：</p>
-<div class="hljs"><pre><code class="hljs shel">正在删除用户 &#x27;tt&#x27;...
+<div class="hljs"><pre><code class="hljs shel">正在删除用户 &#39;tt&#39;...
 警告：组&quot;tt&quot;没有其他成员了。
 完成。</code></pre></div>
 
@@ -284,7 +284,7 @@ passwd：已成功更新密码
 <p>输出显示：</p>
 <div class="hljs"><pre><code class="hljs she">正在寻找要备份或删除的文件...
 正在删除文件...
-正在删除用户 &#x27;tt&#x27;...
+正在删除用户 &#39;tt&#39;...
 警告：组&quot;tt&quot;没有其他成员了。
 完成。</code></pre></div>
 
@@ -294,12 +294,12 @@ passwd：已成功更新密码
 
 
 <p>相关文件：</p>
-<div class="hljs"><pre><code class="hljs she">/etc/passwd - 使 用 者 帐 号 资 讯，可以查看用户信息
-/etc/shadow - 使 用 者 帐 号 资 讯 加 密
-/etc/group - 群 组 资 讯
-/etc/default/useradd - 定 义 资 讯
-/etc/login.defs - 系 统 广 义 设 定
-/etc/skel - 内 含 定 义 档 的 目 录</code></pre></div>
+<div class="hljs"><pre><code class="hljs she">&#x2F;etc&#x2F;passwd - 使 用 者 帐 号 资 讯，可以查看用户信息
+&#x2F;etc&#x2F;shadow - 使 用 者 帐 号 资 讯 加 密
+&#x2F;etc&#x2F;group - 群 组 资 讯
+&#x2F;etc&#x2F;default&#x2F;useradd - 定 义 资 讯
+&#x2F;etc&#x2F;login.defs - 系 统 广 义 设 定
+&#x2F;etc&#x2F;skel - 内 含 定 义 档 的 目 录</code></pre></div>
 
 
 
@@ -314,7 +314,7 @@ passwd：已成功更新密码
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 
@@ -347,8 +347,8 @@ passwd：已成功更新密码
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/06/26/gitee%E7%A0%81%E4%BA%91%E9%83%A8%E7%BD%B2hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-                        <span class="hidden-mobile">gitee码云部署hexo个人博客</span>
+                      <a href="/2020/06/25/%E6%A0%91%E8%8E%93%E6%B4%BE4b-USB%E5%90%AF%E5%8A%A8/">
+                        <span class="hidden-mobile">树莓派4b-USB启动</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

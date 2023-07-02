@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -231,23 +231,23 @@
 <p>Java中有8种基础数据类型，boolean,char,byte,short,int,long,float,double。从jdk5开始提供了自动装箱拆箱机制，对应的包装类型即Boolean，Character，Byte，Short，Integer，Long，Float，Double。</p>
 <h4 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h4><p>装箱就是将基础数据类型转换为对应的包装器类型；</p>
 <p>拆箱就是将包装器类型转换为对应的基础数据类型；</p>
-<h4 id="2、自动装箱（Autoboxing）"><a href="#2、自动装箱（Autoboxing）" class="headerlink" title="2、自动装箱（Autoboxing）"></a>2、自动装箱（Autoboxing）</h4><div class="hljs"><pre><code class="hljs java"><span class="hljs-type">Integer</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>; <span class="hljs-comment">//Boxing</span></code></pre></div>
+<h4 id="2、自动装箱（Autoboxing）"><a href="#2、自动装箱（Autoboxing）" class="headerlink" title="2、自动装箱（Autoboxing）"></a>2、自动装箱（Autoboxing）</h4><div class="hljs"><pre><code class="hljs java">Integer a = <span class="hljs-number">2</span>; <span class="hljs-comment">//Boxing</span></code></pre></div>
 
 <p>简单的理解：将2装在一个箱子里，这个箱子的类型是Integer 。箱子这里面装的数值就是2，我们就完成了一次装箱操作。并把a指向2这个箱子。</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-type">Integer</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Integer</span>(<span class="hljs-number">2</span>);<span class="hljs-comment">//Boxing</span></code></pre></div>
+<div class="hljs"><pre><code class="hljs java">Integer b = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">2</span>);<span class="hljs-comment">//Boxing</span></code></pre></div>
 
 <p>显示装箱。生成一个新的箱子 new Integer(); 并且这个箱子的值为2.而且让b指向这个箱子。</p>
 <h4 id="3、拆箱（Unboxing）"><a href="#3、拆箱（Unboxing）" class="headerlink" title="3、拆箱（Unboxing）"></a>3、拆箱（Unboxing）</h4><p>故名思议就是将对象重新转化为基本数据类型</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">v</span> <span class="hljs-operator">=</span> a.intValue(); <span class="hljs-comment">//Unboxing</span></code></pre></div>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">int</span> v = a.intValue(); <span class="hljs-comment">//Unboxing</span></code></pre></div>
 
 <p>简单的理解：将里面int的值取出来。拆箱有个很典型的用法就是在进行运算的时候：因为对象时不能直接进行运算的，而是要转化为基本数据类型后才能进行加减乘除。</p>
 <p>例如：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-type">Integer</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;
+<div class="hljs"><pre><code class="hljs java">Integer c = <span class="hljs-number">5</span>;
 System.out.print(c--);<span class="hljs-comment">//进行计算时隐含的有自动拆箱</span></code></pre></div>
 
 
 
-<h4 id="4、陷阱"><a href="#4、陷阱" class="headerlink" title="4、陷阱"></a>4、陷阱</h4><div class="hljs"><pre><code class="hljs java">System.out.println(Integer.valueOf(<span class="hljs-literal">null</span>));</code></pre></div>
+<h4 id="4、陷阱"><a href="#4、陷阱" class="headerlink" title="4、陷阱"></a>4、陷阱</h4><div class="hljs"><pre><code class="hljs java">System.out.println(Integer.valueOf(<span class="hljs-keyword">null</span>));</code></pre></div>
 
 <p>Integer对象的值可以为null，所以编译器检查时不会出现检查时异常，但是在转换成int的时候就会抛出空指针异常。</p>
 <h4 id="5、例题"><a href="#5、例题" class="headerlink" title="5、例题"></a>5、例题</h4><p><img src="https://github.com/EriWang520/images/blob/main/v2-5768aefff626e82546bc2004c28a9900_1440w.jpg" srcset="/img/loading.gif" alt="img"></p>
@@ -260,7 +260,7 @@ System.out.print(c--);<span class="hljs-comment">//进行计算时隐含的有�
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

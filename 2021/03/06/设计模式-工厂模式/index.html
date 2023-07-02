@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -236,27 +236,27 @@
 <h4 id="二、工厂方法"><a href="#二、工厂方法" class="headerlink" title="二、工厂方法"></a>二、工厂方法</h4><p>为了解决上面提到的”增加if-else”的问题，可以为每一个产品子类建立一个对应的工厂子类，这些工厂子类实现同一个抽象工厂接口。这样，创建不同的产品，只需要实现不同的工厂子类。当有产品加入时，新建具体工厂继承抽象工厂，而不用修改任何一个类。</p>
 <p><img src="https://github.com/EriWang520/images/blob/main/image-20210313165601761.png" srcset="/img/loading.gif" alt="image-20210313165601761"></p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">// 苹果工厂</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppleFactory</span> &#123;
-    <span class="hljs-keyword">public</span> Fruit <span class="hljs-title function_">create</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Apple</span>();
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppleFactory</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Fruit <span class="hljs-title">create</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Apple();
     &#125;
 &#125;
 
 
 <span class="hljs-comment">// 梨子工厂</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PearFactory</span> &#123;
-    <span class="hljs-keyword">public</span> Fruit <span class="hljs-title function_">create</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Pear</span>();
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PearFactory</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Fruit <span class="hljs-title">create</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Pear();
     &#125;
 &#125;
 
 <span class="hljs-comment">// 调用者</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">eat</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-type">AppleFactory</span> <span class="hljs-variable">appleFactory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AppleFactory</span>();
-        <span class="hljs-type">Fruit</span> <span class="hljs-variable">apple</span> <span class="hljs-operator">=</span> appleFactory.create();
-        <span class="hljs-type">PearFactory</span> <span class="hljs-variable">pearFactory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PearFactory</span>();
-        <span class="hljs-type">Fruit</span> <span class="hljs-variable">pear</span> <span class="hljs-operator">=</span> pearFactory.create();
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>&#123;
+        AppleFactory appleFactory = <span class="hljs-keyword">new</span> AppleFactory();
+        Fruit apple = appleFactory.create();
+        PearFactory pearFactory = <span class="hljs-keyword">new</span> PearFactory();
+        Fruit pear = pearFactory.create();
         apple.eat();
         pear.eat();
     &#125;
@@ -273,33 +273,33 @@
 <p><strong>缺点：</strong></p>
 <p>每一种产品对应一个工厂子类，在创建具体产品对象时，实例化不同的工厂子类。但是，如果业务涉及的子类越来越多，难道每一个子类都要对应一个工厂类吗？这样会使得系统中类的个数成倍增加，增加了代码的复杂度。</p>
 <h4 id="三、抽象工厂"><a href="#三、抽象工厂" class="headerlink" title="三、抽象工厂"></a>三、抽象工厂</h4><p>工厂方法模式可以进一步优化，提取出工厂接口：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">IFactory</span> &#123;
-    Fruit <span class="hljs-title function_">create</span><span class="hljs-params">()</span>;
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IFactory</span> </span>&#123;
+    <span class="hljs-function">Fruit <span class="hljs-title">create</span><span class="hljs-params">()</span></span>;
 &#125;</code></pre></div>
 
 <p>然后苹果工厂和梨子工厂都实现此接口：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AppleFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IFactory</span> &#123;
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppleFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IFactory</span> </span>&#123;
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-keyword">public</span> Fruit <span class="hljs-title function_">create</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Apple</span>();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Fruit <span class="hljs-title">create</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Apple();
     &#125;
 &#125;
 
 
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PearFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IFactory</span> &#123;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PearFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">IFactory</span> </span>&#123;
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-keyword">public</span> Fruit <span class="hljs-title function_">create</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Pear</span>();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Fruit <span class="hljs-title">create</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Pear();
     &#125;
 &#125;</code></pre></div>
 
 <p>此时，调用者可以将 AppleFactory 和 PearFactory 统一作为 IFactory 对象使用，调用者 Java 代码如下：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">eat</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-type">IFactory</span> <span class="hljs-variable">appleFactory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AppleFactory</span>();
-        <span class="hljs-type">Fruit</span> <span class="hljs-variable">apple</span> <span class="hljs-operator">=</span> appleFactory.create();
-        <span class="hljs-type">IFactory</span> <span class="hljs-variable">pearFactory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PearFactory</span>();
-        <span class="hljs-type">Fruit</span> <span class="hljs-variable">pear</span> <span class="hljs-operator">=</span> pearFactory.create();
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>&#123;
+        IFactory appleFactory = <span class="hljs-keyword">new</span> AppleFactory();
+        Fruit apple = appleFactory.create();
+        IFactory pearFactory = <span class="hljs-keyword">new</span> PearFactory();
+        Fruit pear = pearFactory.create();
         apple.eat();
         pear.eat();
     &#125;
@@ -308,19 +308,19 @@
 <p>可以看到，我们在创建时指定了具体的工厂类后，在使用时就无需再关心是哪个工厂类，只需要将此工厂当作抽象的 IFactory 接口使用即可。这种经过抽象的工厂方法模式被称作抽象工厂模式。</p>
 <p>由于客户端只和 IFactory 打交道了，调用的是接口中的方法，使用时根本不需要知道是在哪个具体工厂中实现的这些方法，这就使得替换工厂变得非常容易。</p>
 <p>例如：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">eat</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-type">IFactory</span> <span class="hljs-variable">factory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AppleFactory</span>();
-        <span class="hljs-type">Fruit</span> <span class="hljs-variable">fruit</span> <span class="hljs-operator">=</span> factory.create();
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>&#123;
+        IFactory factory = <span class="hljs-keyword">new</span> AppleFactory();
+        Fruit fruit = factory.create();
         fruit.eat();
     &#125;
 &#125;</code></pre></div>
 
 <p>如果需要替换为吃梨子，只需要更改一行代码即可：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">eat</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-type">IFactory</span> <span class="hljs-variable">factory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PearFactory</span>();
-        <span class="hljs-type">Fruit</span> <span class="hljs-variable">fruit</span> <span class="hljs-operator">=</span> factory.create();
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>&#123;
+        IFactory factory = <span class="hljs-keyword">new</span> PearFactory();
+        Fruit fruit = factory.create();
         fruit.eat();
     &#125;
 &#125;</code></pre></div>
@@ -362,7 +362,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

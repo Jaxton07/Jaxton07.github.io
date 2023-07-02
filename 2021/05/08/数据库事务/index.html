@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -247,7 +247,7 @@
 <p><strong>一致性</strong>是指执行事务前后的状态要一致，可以理解为数据一致性。隔离性侧重指事务之间相互隔离，不受影响，这个与事务设置的隔离级别有密切的关系。</p>
 <p><strong>持久性</strong>则是指在一个事务提交后，这个事务的状态会被持久化到数据库中，也就是事务提交，对数据的新增、更新将会持久化到数据库中。</p>
 <p>原子性、隔离性、持久性都是为了保障一致性而存在的，一致性也是最终的目的。</p>
-<h3 id="2、ACID原理"><a href="#2、ACID原理" class="headerlink" title="2、ACID原理"></a>2、ACID原理</h3><p> <strong>Redo&#x2F;Undo</strong>机制将所有对数据的更新操作都写到日志中。</p>
+<h3 id="2、ACID原理"><a href="#2、ACID原理" class="headerlink" title="2、ACID原理"></a>2、ACID原理</h3><p> <strong>Redo/Undo</strong>机制将所有对数据的更新操作都写到日志中。</p>
 <p>Redo log用来记录某数据块被修改后的值，可以用来恢复未写入 data file 的已成功事务更新的数据；Undo log是用来记录数据更新前的值，保证数据更新失败能够回滚。</p>
 <p>假如数据库在执行的过程中，不小心崩了，可以通过该日志的方式，回滚之前已经执行成功的操作，实现事务的一致性。</p>
 <p>举一个场景，假如某个时刻数据库崩溃，在崩溃之前有事务A和事务B在执行，事务A已经提交，而事务B还未提交。当数据库重启进行 crash-recovery  时，就会通过Redo log将已经提交事务的更改写到数据文件，而还没有提交的就通过Undo log进行roll back。</p>
@@ -265,10 +265,10 @@
 <p><strong>读未提交</strong>会读到另一个事务的未提交的数据，只能防止第一类更新丢失，会产生脏读问题。</p>
 <p><strong>读提交</strong>则解决了脏读的问题，出现了不可重复读，即在一个事务任意时刻读到的数据可能不一样，可能会受到其它事务对数据修改提交后的影响，一般是对于update的操作。</p>
 <p><img src="https://github.com/EriWang520/images/blob/main/v2-b7eb34c0550d7cf0cb2a8f47013bac5a_1440w.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p><strong>可重复读</strong>解决了之前不可重复读和脏读的问题，但是由带来了幻读的问题，幻读一般是针对inser操作。 例如：第一个事务查询一个User表id&#x3D;100发现不存在该数据行，这时第二个事务又进来了，新增了一条id&#x3D;100的数据行并且提交了事务。  这时第一个事务新增一条id&#x3D;100的数据行会报主键冲突，第一个事务再select一下，发现id&#x3D;100数据行已经存在，这就是<strong>幻读</strong>。除此之外，也能防止第二类更新丢失的问题。</p>
+<p><strong>可重复读</strong>解决了之前不可重复读和脏读的问题，但是由带来了幻读的问题，幻读一般是针对inser操作。 例如：第一个事务查询一个User表id=100发现不存在该数据行，这时第二个事务又进来了，新增了一条id=100的数据行并且提交了事务。  这时第一个事务新增一条id=100的数据行会报主键冲突，第一个事务再select一下，发现id=100数据行已经存在，这就是<strong>幻读</strong>。除此之外，也能防止第二类更新丢失的问题。</p>
 <p><strong>串行化</strong>，这是最高的隔离级别。它要求事务序列化执行，事务只能一个接着一个地执行，不能并发执行。在这个级别，可以解决上面提到的所有并发问题，但可能导致大量的超时现象和锁竞争，通常不会用这个隔离级别。</p>
 <p>这四大等级从上到下，隔离的效果是逐渐增强，但是性能却是越来越差。</p>
-<h2 id="三、Mysql的锁机制"><a href="#三、Mysql的锁机制" class="headerlink" title="三、Mysql的锁机制"></a>三、Mysql的锁机制</h2><p>在Mysql中的锁可以分为<strong>共享锁</strong>&#x2F;<strong>读锁</strong>（Shared Locks：允许多个事务同时读取同一行）、<strong>排他锁</strong>&#x2F;<strong>写锁</strong>（Exclusive Locks：只要有写入就独占访问权限） 、<strong>间隙锁</strong>、<strong>行锁（Record Locks）</strong>、<strong>表锁</strong>。</p>
+<h2 id="三、Mysql的锁机制"><a href="#三、Mysql的锁机制" class="headerlink" title="三、Mysql的锁机制"></a>三、Mysql的锁机制</h2><p>在Mysql中的锁可以分为<strong>共享锁</strong>/<strong>读锁</strong>（Shared Locks：允许多个事务同时读取同一行）、<strong>排他锁</strong>/<strong>写锁</strong>（Exclusive Locks：只要有写入就独占访问权限） 、<strong>间隙锁</strong>、<strong>行锁（Record Locks）</strong>、<strong>表锁</strong>。</p>
 <h4 id="1、共享锁（S锁，读锁）："><a href="#1、共享锁（S锁，读锁）：" class="headerlink" title="1、共享锁（S锁，读锁）："></a>1、共享锁（S锁，读锁）：</h4><p>使用说明：若事务A对数据对象1加上S锁，则事务A可以读数据对象1但不能修改，其他事务只能再对数据对象1加S锁，而不能加X锁，直到事务A释放数据对象1上的S锁。这保证了其他事务可以读数据对象1，但在事务A释放数据对象1上的S锁之前不能对数据对象1做任何修改。</p>
 <h4 id="2、排它锁（X锁，写锁）："><a href="#2、排它锁（X锁，写锁）：" class="headerlink" title="2、排它锁（X锁，写锁）："></a>2、排它锁（X锁，写锁）：</h4><p>使用说明：若事务A对数据对象1加上X锁，事务A可以读数据对象1也可以修改数据对象1，其他事务不能再对数据对象1加任何锁，直到事务A释放数据对象1上的锁。这保证了其他事务在事务A释放数据对象1上的锁之前不能再读取和修改数据对象1。</p>
 <p> 在四个隔离级别中加锁肯定是要消耗性能的，而读未提交是没有加任何锁的，所以对于它来说也就是没有隔离的效果，所以它的性能也是最好的。</p>
@@ -279,7 +279,7 @@
 <p>通常实现是这样的：在表中的数据进行操作时(更新)，先给数据表加一个版本(version)字段，每操作一次，将那条记录的版本号加1。也就是先查询出那条记录，获取出version字段,如果要对那条记录进行操作(更新),则先判断此刻version的值是否与刚刚查询出来时的version的值相等，如果相等，则说明这段期间，没有其他程序对其进行操作，则可以执行更新，将version字段的值加1；如果更新时发现此刻的version值与刚刚获取出来的version的值不相等，则说明这段期间已经有其他程序对其进行操作了，则不进行更新操作。</p>
 <p><strong>优点</strong>：从上面的例子可以看出，乐观锁机制避免了长事务中的数据库加锁开销，大大提升了大并发量下的系统整体性能表现。<br><strong>缺点</strong>：乐观锁机制往往基于系统中的数据存储逻辑，因此也具备一定的局限性，如在上例中，由于乐观锁机制是在我们的系统中实现，来自外部系统的更新操作不受我们系统的控制，因此可能会造成脏数据被更新到数据库中。在系统设计阶段，应该充分考虑到这些情况出现的可能性，并进行相应调整（如将乐观锁策略在数据库存储过程中实现，对外只开放基于此存储过程的数据更新途径，而不是将数据库表直接对外公开）。<br><strong>总结</strong>：读用乐观锁，写用悲观锁。</p>
 <h5 id="2、悲观锁："><a href="#2、悲观锁：" class="headerlink" title="2、悲观锁："></a>2、悲观锁：</h5><p>悲观锁，正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）</p>
-<p>悲观锁的实现：首先实现悲观锁时，我们必须先使用set autocommit&#x3D;0; 关闭mysql的autoCommit属性。因为我们查询出数据之后就要将该数据锁定。</p>
+<p>悲观锁的实现：首先实现悲观锁时，我们必须先使用set autocommit=0; 关闭mysql的autoCommit属性。因为我们查询出数据之后就要将该数据锁定。</p>
 <p>悲观锁就是悲观主义者，它会认为我们在事务A中操作数据1的时候，一定会有事务B来修改数据1,所以，在第2步我们将数据查询出来后直接加上排它锁（X）锁，防止别的事务来修改事务1，直到我们commit后，才释放了排它锁。</p>
 <p><strong>优点：</strong>保证了数据处理时的安全性。</p>
 <p><strong>缺点：</strong>加锁造成了开销增加，并且增加了死锁的机会。降低了并发性。</p>
@@ -290,7 +290,7 @@
 <p><strong>行锁</strong>锁定当前数据行，锁的粒度小，加锁慢，发生锁冲突的概率小，并发度高，行锁也是MyISAM和InnoDB的区别之一，InnoDB支持行锁并且支持事务 。</p>
 <p>而<strong>表锁</strong>则锁的粒度大，加锁快，开销小，但是锁冲突的概率大，并发度低。</p>
 <p><strong>间隙锁</strong>则分为两种：<code>Gap Locks</code>和<code>Next-Key Locks</code>。Gap Locks会锁住两个索引之间的区间，比如select * from User where id&gt;3 and id&lt;5 for update，就会在区间（3，5）之间加上Gap Locks。</p>
-<p>Next-Key Locks是Gap Locks+Record Locks形成闭区间锁select * from User where  id&gt;&#x3D;3 and id&#x3D;&lt;5 for update，就会在区间[3,5]之间加上Next-Key Locks。</p>
+<p>Next-Key Locks是Gap Locks+Record Locks形成闭区间锁select * from User where  id&gt;=3 and id=&lt;5 for update，就会在区间[3,5]之间加上Next-Key Locks。</p>
 <p> <strong>那Mysql中什么时候会加锁呢？</strong></p>
 <p>在数据库的增、删、改、查中，只有增、删、改才会加上排它锁，而只是查询并不会加锁，只能通过在select语句后显式加lock in share mode或者for update来加共享锁或者排它锁。</p>
 <p><strong>MVCC（多版本并发控制）：</strong></p>
@@ -323,7 +323,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

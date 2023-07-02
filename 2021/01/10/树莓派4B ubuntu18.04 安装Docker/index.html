@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      584 字
+      580 字
     </span>
   
 
@@ -239,7 +239,7 @@
 <p>添加 Docker-ce 源：</p>
 <div class="hljs"><pre><code class="hljs shell">sudo add-apt-repository &quot;deb [arch=arm64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable&quot;</code></pre></div>
 
-<p>树莓派是ARM架构的，所以在添加源时应当指定参数：arch&#x3D;arm64</p>
+<p>树莓派是ARM架构的，所以在添加源时应当指定参数：arch=arm64</p>
 <h3 id="4、然后更新软件包"><a href="#4、然后更新软件包" class="headerlink" title="4、然后更新软件包"></a>4、然后更新软件包</h3><div class="hljs"><pre><code class="hljs shel">sudo apt update</code></pre></div>
 
 
@@ -316,7 +316,7 @@ ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 <p>在最后加上：</p>
 <div class="hljs"><pre><code class="hljs shell">--graph /mnt/sde/docker</code></pre></div>
 
-<p>&#x2F;mnt&#x2F;sde&#x2F;docker 就是新目录</p>
+<p>/mnt/sde/docker 就是新目录</p>
 <h4 id="3、重新载入配置"><a href="#3、重新载入配置" class="headerlink" title="3、重新载入配置"></a>3、重新载入配置</h4><div class="hljs"><pre><code class="hljs shell">systemctl daemon-reload</code></pre></div>
 
 
@@ -338,7 +338,7 @@ ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

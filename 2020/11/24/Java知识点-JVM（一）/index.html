@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -274,7 +274,7 @@
 </ol>
 <p>每次在from survivor 到 to survivor移动时都存活的对象，年龄就+1，当年龄达到15（默认值），就升级为老生代。大对象会直接进入老生代。</p>
 <p>老生代当空间占用达到某个值之后就会触发全局垃圾回收，一般使用标记-整理算法，以上循环往复。</p>
-<h3 id="3-典型的垃圾回收器"><a href="#3-典型的垃圾回收器" class="headerlink" title="3.典型的垃圾回收器"></a>3.典型的垃圾回收器</h3><h4 id="3-1-Serial-x2F-Serial-Old"><a href="#3-1-Serial-x2F-Serial-Old" class="headerlink" title="3.1 Serial&#x2F;Serial Old"></a>3.1 Serial&#x2F;Serial Old</h4><p>Serial&#x2F;Serial Old收集器是最基本最古老的收集器，它是一个单线程收集器，并且在它进行垃圾收集时，必须暂停所有用户线程。Serial收集器是针对新生代的收集器，采用的是Copying算法，Serial Old收集器是针对老年代的收集器，采用的是Mark-Compact算法。它的优点是实现简单高效，但是缺点是会给用户带来停顿。</p>
+<h3 id="3-典型的垃圾回收器"><a href="#3-典型的垃圾回收器" class="headerlink" title="3.典型的垃圾回收器"></a>3.典型的垃圾回收器</h3><h4 id="3-1-Serial-Serial-Old"><a href="#3-1-Serial-Serial-Old" class="headerlink" title="3.1 Serial/Serial Old"></a>3.1 Serial/Serial Old</h4><p>Serial/Serial Old收集器是最基本最古老的收集器，它是一个单线程收集器，并且在它进行垃圾收集时，必须暂停所有用户线程。Serial收集器是针对新生代的收集器，采用的是Copying算法，Serial Old收集器是针对老年代的收集器，采用的是Mark-Compact算法。它的优点是实现简单高效，但是缺点是会给用户带来停顿。</p>
 <h4 id="3-2-ParNew"><a href="#3-2-ParNew" class="headerlink" title="3.2 ParNew"></a>3.2 ParNew</h4><p>ParNew收集器是Serial收集器的多线程版本，使用多个线程进行垃圾收集。</p>
 <h4 id="3-3-Parallel-Scavenge"><a href="#3-3-Parallel-Scavenge" class="headerlink" title="3.3 Parallel Scavenge"></a>3.3 Parallel Scavenge</h4><p>Parallel Scavenge收集器是一个新生代的多线程收集器（并行收集器），它在回收期间不需要暂停其他用户线程，其采用的是Copying算法，该收集器与前两个收集器有所不同，它主要是为了达到一个可控的吞吐量。</p>
 <h4 id="3-4-Parallel-Old"><a href="#3-4-Parallel-Old" class="headerlink" title="3.4 Parallel Old"></a>3.4 Parallel Old</h4><p>Parallel Old是Parallel Scavenge收集器的老年代版本（并行收集器），使用多线程和Mark-Compact算法。</p>
@@ -291,7 +291,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

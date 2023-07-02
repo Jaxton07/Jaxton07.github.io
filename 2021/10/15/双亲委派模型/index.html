@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -228,28 +228,27 @@
             
             <div class="markdown-body">
               <h1 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h1><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/codeyanbao/article/details/82875064">https://blog.csdn.net/codeyanbao/article/details/82875064</a></p>
-<h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><p>​	在介绍双亲委派机制的时候，不得不提ClassLoader（类加载器）。说ClassLoader之前，我们得先了解下Java的基本知识。  </p>
+<h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><p>​    在介绍双亲委派机制的时候，不得不提ClassLoader（类加载器）。说ClassLoader之前，我们得先了解下Java的基本知识。  </p>
 <p>Java是运行在Java的虚拟机(JVM)中的，但是它是如何运行在JVM中了呢？我们在IDE中编写的Java源代码被编译器编译成.class的字节码文件。然后由我们得ClassLoader负责将这些class文件给加载到JVM中去执行。  </p>
 <h4 id="2-JVM中提供了三层的ClassLoader："><a href="#2-JVM中提供了三层的ClassLoader：" class="headerlink" title="2.JVM中提供了三层的ClassLoader："></a>2.JVM中提供了三层的ClassLoader：</h4><div class="hljs"><pre><code>Bootstrap classLoader:主要负责加载核心的类库(java.lang.*等)，构造ExtClassLoader和APPClassLoader。
 
 ExtClassLoader：主要负责加载jre/lib/ext目录下的一些扩展的jar。
 
-AppClassLoader：主要负责加载应用程序的主函数类
-</code></pre></div>
+AppClassLoader：主要负责加载应用程序的主函数类</code></pre></div>
 <h4 id="3-双亲委派"><a href="#3-双亲委派" class="headerlink" title="3.双亲委派"></a>3.双亲委派</h4><div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> Class&lt;?&gt; loadClass(String name) <span class="hljs-keyword">throws</span> ClassNotFoundException &#123;
-    <span class="hljs-keyword">return</span> loadClass(name, <span class="hljs-literal">false</span>);
+    <span class="hljs-keyword">return</span> loadClass(name, <span class="hljs-keyword">false</span>);
 &#125;
 <span class="hljs-comment">//              -----??-----</span>
-<span class="hljs-keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="hljs-type">boolean</span> resolve)
+<span class="hljs-keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="hljs-keyword">boolean</span> resolve)
     <span class="hljs-keyword">throws</span> ClassNotFoundException
 &#123;
         <span class="hljs-comment">// 首先，检查是否已经被类加载器加载过</span>
         Class&lt;?&gt; c = findLoadedClass(name);
-        <span class="hljs-keyword">if</span> (c == <span class="hljs-literal">null</span>) &#123;
+        <span class="hljs-keyword">if</span> (c == <span class="hljs-keyword">null</span>) &#123;
             <span class="hljs-keyword">try</span> &#123;
                 <span class="hljs-comment">// 存在父加载器，递归的交由父加载器</span>
-                <span class="hljs-keyword">if</span> (parent != <span class="hljs-literal">null</span>) &#123;
-                    c = parent.loadClass(name, <span class="hljs-literal">false</span>);
+                <span class="hljs-keyword">if</span> (parent != <span class="hljs-keyword">null</span>) &#123;
+                    c = parent.loadClass(name, <span class="hljs-keyword">false</span>);
                 &#125; <span class="hljs-keyword">else</span> &#123;
                     <span class="hljs-comment">// 直到最上面的Bootstrap类加载器</span>
                     c = findBootstrapClassOrNull(name);
@@ -259,7 +258,7 @@ AppClassLoader：主要负责加载应用程序的主函数类
                 <span class="hljs-comment">// from the non-null parent class loader</span>
             &#125;
  
-            <span class="hljs-keyword">if</span> (c == <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-keyword">if</span> (c == <span class="hljs-keyword">null</span>) &#123;
                 <span class="hljs-comment">// If still not found, then invoke findClass in order</span>
                 <span class="hljs-comment">// to find the class.</span>
                 c = findClass(name);
@@ -280,7 +279,7 @@ AppClassLoader：主要负责加载应用程序的主函数类
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

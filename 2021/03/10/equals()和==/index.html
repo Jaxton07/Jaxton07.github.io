@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -184,7 +184,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      949 字
+      931 字
     </span>
   
 
@@ -194,7 +194,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      12
        分钟
     </span>
   
@@ -227,54 +227,54 @@
             <h1 style="display: none">equals() 和 ==</h1>
             
             <div class="markdown-body">
-              <h1 id="equals-和-x3D-x3D"><a href="#equals-和-x3D-x3D" class="headerlink" title="equals() 和 &#x3D;&#x3D;"></a>equals() 和 &#x3D;&#x3D;</h1><h4 id="1、基本数据类型"><a href="#1、基本数据类型" class="headerlink" title="1、基本数据类型"></a>1、基本数据类型</h4><p>对于基本数据类型来说，&#x3D;&#x3D; 比较的是两者的值。如 int、byte、char、short、 long、float、double, boolean是转成int来存的，所以比较的是值。</p>
-<h4 id="2、封装类"><a href="#2、封装类" class="headerlink" title="2、封装类"></a>2、封装类</h4><p>对于封装类，比如 String、Integer等这些类 &#x3D;&#x3D; 比较的是对象的地址值.</p>
+              <h1 id="equals-和"><a href="#equals-和" class="headerlink" title="equals() 和 =="></a>equals() 和 ==</h1><h4 id="1、基本数据类型"><a href="#1、基本数据类型" class="headerlink" title="1、基本数据类型"></a>1、基本数据类型</h4><p>对于基本数据类型来说，== 比较的是两者的值。如 int、byte、char、short、 long、float、double, boolean是转成int来存的，所以比较的是值。</p>
+<h4 id="2、封装类"><a href="#2、封装类" class="headerlink" title="2、封装类"></a>2、封装类</h4><p>对于封装类，比如 String、Integer等这些类 == 比较的是对象的地址值.</p>
 <p>而equals() 作为Object 类的方法，默认比较的也是对象的地址值，</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object obj)</span> &#123;
-        <span class="hljs-keyword">return</span> (<span class="hljs-built_in">this</span> == obj);
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span> == obj);
 &#125;</code></pre></div>
 
 <p>但是 String 等封装类重写了equals() 方法，所以最后比较的是两者的数据值，而不是地址。</p>
 <p>String 重写的方法:</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">equals</span><span class="hljs-params">(Object anObject)</span> &#123;
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span> == anObject) &#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object anObject)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == anObject) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
     &#125;
     <span class="hljs-keyword">if</span> (anObject <span class="hljs-keyword">instanceof</span> String) &#123;
-        <span class="hljs-type">String</span> <span class="hljs-variable">anotherString</span> <span class="hljs-operator">=</span> (String)anObject;
-        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> value.length;
+        String anotherString = (String)anObject;
+        <span class="hljs-keyword">int</span> n = value.length;
         <span class="hljs-keyword">if</span> (n == anotherString.value.length) &#123;
-            <span class="hljs-type">char</span> v1[] = value;
-            <span class="hljs-type">char</span> v2[] = anotherString.value;
-            <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">char</span> v1[] = value;
+            <span class="hljs-keyword">char</span> v2[] = anotherString.value;
+            <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
             <span class="hljs-keyword">while</span> (n-- != <span class="hljs-number">0</span>) &#123;
                 <span class="hljs-keyword">if</span> (v1[i] != v2[i])
-                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
                 i++;
             &#125;
-            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
         &#125;
     &#125;
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
 &#125;</code></pre></div>
 
 
 
-<p>但是并不是说所有的 &#x3D;&#x3D; 和 equals() 比较的值都一定相等或一定不相等。</p>
+<p>但是并不是说所有的 == 和 equals() 比较的值都一定相等或一定不相等。</p>
 <p>看下面这段代码：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testString</span><span class="hljs-params">()</span>&#123;
-        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2021-05-28&quot;</span>;
-        <span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2021-05-28&quot;</span>;
-        <span class="hljs-type">String</span> <span class="hljs-variable">str3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;2021-05-28&quot;</span>);
-        <span class="hljs-type">Integer</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">127</span>;
-        <span class="hljs-type">Integer</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">127</span>;
-        <span class="hljs-type">Integer</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">128</span>;
-        <span class="hljs-type">Integer</span> <span class="hljs-variable">d</span> <span class="hljs-operator">=</span> <span class="hljs-number">128</span>;
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testString</span><span class="hljs-params">()</span></span>&#123;
+        String str = <span class="hljs-string">&quot;2021-05-28&quot;</span>;
+        String str2 = <span class="hljs-string">&quot;2021-05-28&quot;</span>;
+        String str3 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;2021-05-28&quot;</span>);
+        Integer a = <span class="hljs-number">127</span>;
+        Integer b = <span class="hljs-number">127</span>;
+        Integer c = <span class="hljs-number">128</span>;
+        Integer d = <span class="hljs-number">128</span>;
         System.out.println(<span class="hljs-string">&quot;a==b? :&quot;</span> + (a == b));		<span class="hljs-comment">//1</span>
         System.out.println(<span class="hljs-string">&quot;c==d? :&quot;</span> + (c == d));		<span class="hljs-comment">//2</span>
 
 
-        <span class="hljs-type">String</span> <span class="hljs-variable">addr</span> <span class="hljs-operator">=</span> str.intern();
+        String addr = str.intern();
         System.out.println(str == str2);		<span class="hljs-comment">//3</span>
         System.out.println(str == str3);		<span class="hljs-comment">//4</span>
         System.out.println(str.equals(str2));		<span class="hljs-comment">//5</span>
@@ -291,11 +291,11 @@
     &#125;</code></pre></div>
 
 <p>执行后的结果：</p>
-<div class="hljs"><pre><code class="hljs java">a==b? :<span class="hljs-literal">true</span>						<span class="hljs-comment">//1</span>
-c==d? :<span class="hljs-literal">false</span>					<span class="hljs-comment">//2</span>
-<span class="hljs-literal">true</span>							<span class="hljs-comment">//3</span>
-<span class="hljs-literal">false</span>							<span class="hljs-comment">//4</span>
-<span class="hljs-literal">true</span>							<span class="hljs-comment">//5</span>
+<div class="hljs"><pre><code class="hljs java">a==b? :<span class="hljs-keyword">true</span>						<span class="hljs-comment">//1</span>
+c==d? :<span class="hljs-keyword">false</span>					<span class="hljs-comment">//2</span>
+<span class="hljs-keyword">true</span>							<span class="hljs-comment">//3</span>
+<span class="hljs-keyword">false</span>							<span class="hljs-comment">//4</span>
+<span class="hljs-keyword">true</span>							<span class="hljs-comment">//5</span>
 <span class="hljs-number">2021</span>-<span class="hljs-number">05</span>-<span class="hljs-number">28</span>						<span class="hljs-comment">//6</span>
 a.addr:<span class="hljs-number">1735600054</span>				<span class="hljs-comment">//7</span>
 b.addr:<span class="hljs-number">1735600054</span>				<span class="hljs-comment">//8</span>
@@ -309,11 +309,11 @@ str3.addr:<span class="hljs-number">325040804</span>				<span class="hljs-commen
 
 <p>我们先来看第五条，str 和 str3 的值相等，所以 equals() 比较两者为 true,这符合我们的预期结果。</p>
 <p>3：</p>
-<p>既然说封装类 &#x3D;&#x3D; 比较的是地址，那为什么 str 和 str2 &#x3D;&#x3D; 比较的结果却是true 呢，原因就是这两个引用指向的是同一个对象。为什么？原因是为了减少或避免重复创建相同的对象，jdk有一个常量池，对于String 来说我们暂且称为 字符串常量池。在 str 被创建的时候这个字符串就被添加到了常量池。下次给对象用 &#x3D;&#x3D; 赋值时，如果常量池中存在相同的字符串，那就直接把引用地址赋给新对象的引用，也就是 str2。所以两者指向的是同一个对象，同一个地址。</p>
+<p>既然说封装类 == 比较的是地址，那为什么 str 和 str2 == 比较的结果却是true 呢，原因就是这两个引用指向的是同一个对象。为什么？原因是为了减少或避免重复创建相同的对象，jdk有一个常量池，对于String 来说我们暂且称为 字符串常量池。在 str 被创建的时候这个字符串就被添加到了常量池。下次给对象用 == 赋值时，如果常量池中存在相同的字符串，那就直接把引用地址赋给新对象的引用，也就是 str2。所以两者指向的是同一个对象，同一个地址。</p>
 <p>4：</p>
-<p>那么为什么创建 str3 的时候赋的也是一样的值，但是 str &#x3D;&#x3D; str3 的结果却为 false？因为用  new String(“2021-05-28”) 就重新创建了一个新的对象，而不是直接把常量池的对象引用赋给它。自然就不是同一个地址。</p>
+<p>那么为什么创建 str3 的时候赋的也是一样的值，但是 str == str3 的结果却为 false？因为用  new String(“2021-05-28”) 就重新创建了一个新的对象，而不是直接把常量池的对象引用赋给它。自然就不是同一个地址。</p>
 <p>1：</p>
-<p>知道上面的原因后，我们就大概可以知道为什么 a &#x3D;&#x3D; b 为 true 了，也是常量池直接把引用赋给新对象引用。所以两个变量指向的是同一个对象，同一个地址。</p>
+<p>知道上面的原因后，我们就大概可以知道为什么 a == b 为 true 了，也是常量池直接把引用赋给新对象引用。所以两个变量指向的是同一个对象，同一个地址。</p>
 <p>2：</p>
 <p>但是为什么同样的语句，c 和 d 就不行了？</p>
 <p>因为 int 的常量池有个范围限制，总不可能把所有的数都放到常量池里，而这个范围上限就是 127，所以超过 127 的就会重新创建对象，重新分配地址。</p>
@@ -328,7 +328,7 @@ str3.addr:<span class="hljs-number">325040804</span>				<span class="hljs-commen
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 

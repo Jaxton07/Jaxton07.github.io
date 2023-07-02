@@ -157,7 +157,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/bg1.jpg') no-repeat center center;
+         style="background: url('/img/girl_bg1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
@@ -228,27 +228,27 @@
             
             <div class="markdown-body">
               <h1 id="HashMap和HashTable"><a href="#HashMap和HashTable" class="headerlink" title="HashMap和HashTable"></a>HashMap和HashTable</h1><p>这里总结下两者的区别。部分内容参考自：</p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=hashmap%E5%92%8Chashtable&utm_content=search_suggestion&type=content">https://www.zhihu.com/search?q=hashmap%E5%92%8Chashtable&amp;utm_content=search_suggestion&amp;type=content</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=hashmap%E5%92%8Chashtable&amp;utm_content=search_suggestion&amp;type=content">https://www.zhihu.com/search?q=hashmap%E5%92%8Chashtable&amp;utm_content=search_suggestion&amp;type=content</a></p>
 <p>1、HashMap 是线程不安全的，在多线程下容易产生死循环。但是在单线程下效率较高。Hashtable线程安全的，很多方法都有synchronized修饰，但同时因为加锁导致单线程环境下效率较低。</p>
 <p>2、HashMap允许有一个key为null，允许多个value为null；而Hashtable不允许key或者value为null。</p>
 <p>然后讲下源码实现上的一些区别吧。</p>
 <h4 id="1、构造函数的比较"><a href="#1、构造函数的比较" class="headerlink" title="1、构造函数的比较"></a>1、构造函数的比较</h4><p>HashMap：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">HashMap</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity, <span class="hljs-type">float</span> loadFactor)</span> &#123;
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity, <span class="hljs-keyword">float</span> loadFactor)</span> </span>&#123;
     <span class="hljs-keyword">if</span> (initialCapacity &lt; <span class="hljs-number">0</span>)
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Illegal initial capacity: &quot;</span> +
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Illegal initial capacity: &quot;</span> +
                                            initialCapacity);
     <span class="hljs-keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)
         initialCapacity = MAXIMUM_CAPACITY;
     <span class="hljs-keyword">if</span> (loadFactor &lt;= <span class="hljs-number">0</span> || Float.isNaN(loadFactor))
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Illegal load factor: &quot;</span> +
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Illegal load factor: &quot;</span> +
                                            loadFactor);
-    <span class="hljs-built_in">this</span>.loadFactor = loadFactor;
-    <span class="hljs-built_in">this</span>.threshold = tableSizeFor(initialCapacity);
+    <span class="hljs-keyword">this</span>.loadFactor = loadFactor;
+    <span class="hljs-keyword">this</span>.threshold = tableSizeFor(initialCapacity);
 &#125;
 ​
 <span class="hljs-comment">//该方法返回大于等于cap的最小2次幂的整数</span>
-<span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-title function_">tableSizeFor</span><span class="hljs-params">(<span class="hljs-type">int</span> cap)</span> &#123;
-    <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> cap - <span class="hljs-number">1</span>;
+<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">tableSizeFor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cap)</span> </span>&#123;
+    <span class="hljs-keyword">int</span> n = cap - <span class="hljs-number">1</span>;
     n |= n &gt;&gt;&gt; <span class="hljs-number">1</span>;
     n |= n &gt;&gt;&gt; <span class="hljs-number">2</span>;
     n |= n &gt;&gt;&gt; <span class="hljs-number">4</span>;
@@ -259,54 +259,54 @@
 
 <p>HashMap的底层数组大小必须为2^n，主要是为了后面数据量大时减小hash冲突。</p>
 <p>Hashtable：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">Hashtable</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity, <span class="hljs-type">float</span> loadFactor)</span> &#123;
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Hashtable</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity, <span class="hljs-keyword">float</span> loadFactor)</span> </span>&#123;
     <span class="hljs-keyword">if</span> (initialCapacity &lt; <span class="hljs-number">0</span>)
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Illegal Capacity: &quot;</span>+
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Illegal Capacity: &quot;</span>+
                                            initialCapacity);
     <span class="hljs-keyword">if</span> (loadFactor &lt;= <span class="hljs-number">0</span> || Float.isNaN(loadFactor))
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Illegal Load: &quot;</span>+loadFactor);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Illegal Load: &quot;</span>+loadFactor);
 ​
     <span class="hljs-keyword">if</span> (initialCapacity==<span class="hljs-number">0</span>)
         initialCapacity = <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">this</span>.loadFactor = loadFactor;
-    table = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Entry</span>&lt;?,?&gt;[initialCapacity];
-    threshold = (<span class="hljs-type">int</span>)Math.min(initialCapacity * loadFactor, MAX_ARRAY_SIZE + <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">this</span>.loadFactor = loadFactor;
+    table = <span class="hljs-keyword">new</span> Entry&lt;?,?&gt;[initialCapacity];
+    threshold = (<span class="hljs-keyword">int</span>)Math.min(initialCapacity * loadFactor, MAX_ARRAY_SIZE + <span class="hljs-number">1</span>);
 &#125;
 ​
-<span class="hljs-keyword">public</span> <span class="hljs-title function_">Hashtable</span><span class="hljs-params">()</span> &#123;
-    <span class="hljs-built_in">this</span>(<span class="hljs-number">11</span>, <span class="hljs-number">0.75f</span>);
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Hashtable</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">this</span>(<span class="hljs-number">11</span>, <span class="hljs-number">0.75f</span>);
 &#125;</code></pre></div>
 
 <p>Hashtable的长度可以是任意值，导致当底层数组长度为合数的时候，Hashtable的hash算法散射不均匀，容易产生hash冲突。所以，可以清楚的看到Hashtable的默认构造函数底层数组长度为11（质数）。原因可以看看这篇</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhishengqianjun/article/details/79087525?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.control&dist_request_id=743237a1-2185-4f92-b696-4f3fd31e1746&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.control">https://blog.csdn.net/zhishengqianjun/article/details/79087525?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.control&amp;dist_request_id=743237a1-2185-4f92-b696-4f3fd31e1746&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.control</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhishengqianjun/article/details/79087525?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.control&amp;dist_request_id=743237a1-2185-4f92-b696-4f3fd31e1746&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.control">https://blog.csdn.net/zhishengqianjun/article/details/79087525?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.control&amp;dist_request_id=743237a1-2185-4f92-b696-4f3fd31e1746&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-4.control</a></p>
 <h4 id="2、hash算法的区别"><a href="#2、hash算法的区别" class="headerlink" title="2、hash算法的区别"></a>2、hash算法的区别</h4><p>关于扰动函数详细可看这篇：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20733617">https://www.zhihu.com/question/20733617</a></p>
 <p>HashMap：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-title function_">hash</span><span class="hljs-params">(Object key)</span> &#123;
-    <span class="hljs-type">int</span> h;
-    <span class="hljs-keyword">return</span> (key == <span class="hljs-literal">null</span>) ? <span class="hljs-number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="hljs-number">16</span>);
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hash</span><span class="hljs-params">(Object key)</span> </span>&#123;
+    <span class="hljs-keyword">int</span> h;
+    <span class="hljs-keyword">return</span> (key == <span class="hljs-keyword">null</span>) ? <span class="hljs-number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="hljs-number">16</span>);
 &#125;
 <span class="hljs-comment">//手写的，源码在不存在这一句，但是原理是类似的，详情可以去看putVal方法</span>
-<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> (table.length-<span class="hljs-number">1</span>) &amp; hash(key)</code></pre></div>
+<span class="hljs-keyword">int</span> i = (table.length-<span class="hljs-number">1</span>) &amp; hash(key)</code></pre></div>
 
 <p>putVal方法相关源码：</p>
-<div class="hljs"><pre><code class="hljs java">Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="hljs-type">int</span> n, i;
-<span class="hljs-keyword">if</span> ((tab = table) == <span class="hljs-literal">null</span> || (n = tab.length) == <span class="hljs-number">0</span>)
+<div class="hljs"><pre><code class="hljs java">Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="hljs-keyword">int</span> n, i;
+<span class="hljs-keyword">if</span> ((tab = table) == <span class="hljs-keyword">null</span> || (n = tab.length) == <span class="hljs-number">0</span>)
     n = (tab = resize()).length;
-<span class="hljs-keyword">if</span> ((p = tab[i = (n - <span class="hljs-number">1</span>) &amp; hash]) == <span class="hljs-literal">null</span>)
-    tab[i] = newNode(hash, key, value, <span class="hljs-literal">null</span>);</code></pre></div>
+<span class="hljs-keyword">if</span> ((p = tab[i = (n - <span class="hljs-number">1</span>) &amp; hash]) == <span class="hljs-keyword">null</span>)
+    tab[i] = newNode(hash, key, value, <span class="hljs-keyword">null</span>);</code></pre></div>
 
 
 
 <p>hash算法将 key 的 hash 值散射到数组中，</p>
 <p>1、合数2^n转换为2进制的数之后，最高位为1其余的位数都为0，比如16–&gt;10000，32–&gt;100000。那么，2^n-1转换为2进制后，所有的bit位都为1，比如31–&gt;11111，127–&gt;1111111。所以，hashcode与（2^n-1）做&amp;运算每一个bit位都可以保持原来的值。</p>
-<p>2、当hash()方法得到的值&lt;&#x3D;（table.length-1）,其运算结果就在[0,table.length-1]范围内均匀散射。当hash()方法得到的值小于table.length-1的时候，运算结果就是该方法的原值。当hash()方法得到的值等于table.length-1的的时候，运算结果为0。</p>
+<p>2、当hash()方法得到的值&lt;=（table.length-1）,其运算结果就在[0,table.length-1]范围内均匀散射。当hash()方法得到的值小于table.length-1的时候，运算结果就是该方法的原值。当hash()方法得到的值等于table.length-1的的时候，运算结果为0。</p>
 <p>3、当hash()得到的值&gt;(table.length-1)，此时table.length-1为较小的数，所以&amp;运算的结果还是在[0,table.length-1]之间。具体实现是这样的，table.length-1转化为2进制的数之后位数小于hash()方法得到的2进制数，所以它的高位只能用0去补齐，又由于&amp;运算的特性，只要有一个为0那么都为0，所以此时相当于转化为情况1。</p>
 <p>总结下就是在数组较小的时候，key 的 hash 值相对数组长度值来说较大，进行按位与操作时，数组的二进制会在前面补 0，然后操作结果实际上舍弃了hash值的高位部分。</p>
 <p>在数组越来越大之后，补的0也相应减少，所以总能够刚刚好匹配散射进数组。</p>
 <p>Hashtable：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">hash</span> <span class="hljs-operator">=</span> key.hashCode();
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">int</span> hash = key.hashCode();
 <span class="hljs-comment">//0x7FFFFFFF转换为10进制之后是Intger.MAX_VALUE,也就是2^31 - 1</span>
-<span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> (hash &amp; <span class="hljs-number">0x7FFFFFFF</span>) % tab.length;</code></pre></div>
+<span class="hljs-keyword">int</span> index = (hash &amp; <span class="hljs-number">0x7FFFFFFF</span>) % tab.length;</code></pre></div>
 
 <p>可以看出Hashtable的hash算法首先使得hash的值小于等于整型数的最大值，再通过%运算实现均匀散射。</p>
 <p>由于计算机是底层的运算是基于2进制的，所以HashMap的hash算法使用&amp;运算代替%运算，在运算速度上明显HashMap的hash算法更优。</p>
@@ -323,7 +323,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
                     
                   </div>
                 
