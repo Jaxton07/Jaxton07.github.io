@@ -231,7 +231,7 @@
 <p>中途遇到一些坑，导致wsl直接启动不了，重装也无济于事。。。索性最后成功了。为了以后不再踩同样的坑，在这里记录一下。</p>
 <h3 id="1、安装systemd"><a href="#1、安装systemd" class="headerlink" title="1、安装systemd"></a>1、安装systemd</h3><p>查的资料说 gnome 桌面是基于 systemd 的，但是目前(2020.11.23) WSL 还不自带 systemd ，反正还有点问题吧，然后就只能我们自己安装，这里就是第一个坑，也就是<strong>导致 WSL 进不去的原因</strong>。</p>
 <p>首先，我们在安装systemd之前一定要检查一下自己的WSL 系统有没有 <strong>daemonize</strong>  ，没有的话需要提前安装，不然之后安装了systemd会导致进不去WSL：</p>
-<p><img src="https://github.com/EriWang520/images/blob/main/img/2YjG4zlu8SmJvyq.png" srcset="/img/loading.gif" alt="没装dasmonize"></p>
+<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/2YjG4zlu8SmJvyq.png" srcset="/img/loading.gif" alt="没装dasmonize"></p>
 <p>查看有没有 <strong>daemonize</strong>：</p>
 <div class="hljs"><pre><code class="hljs java">which daemonize</code></pre></div>
 
@@ -289,12 +289,12 @@ sudo systemctl restart xrdp</code></pre></div>
 
 <p>马上就大功告成了！</p>
 <h3 id="3、连接远程桌面"><a href="#3、连接远程桌面" class="headerlink" title="3、连接远程桌面"></a>3、连接远程桌面</h3><p>注意连接的时候一定要保持xrdp服务运行，重启wsl之后要打开一下。</p>
-<p><img src="https://github.com/EriWang520/images/blob/main/img/Hq93eRSKoNYWnQC.png" srcset="/img/loading.gif" alt="win10远程桌面1"></p>
+<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/Hq93eRSKoNYWnQC.png" srcset="/img/loading.gif" alt="win10远程桌面1"></p>
 <p>输入wsl的账号密码：</p>
-<p><img src="https://github.com/EriWang520/images/blob/main/img/Q5R3EFJmTKZC4fi.png" srcset="/img/loading.gif" alt="win10远程桌面连接登录"></p>
+<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/Q5R3EFJmTKZC4fi.png" srcset="/img/loading.gif" alt="win10远程桌面连接登录"></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/EriWang520/images/blob/main">https://github.com/EriWang520/images/blob/main</a></p>
 <p>进入桌面：</p>
-<p><img src="https://github.com/EriWang520/images/blob/main/img/pfKWLguNmi2YrtQ.png" srcset="/img/loading.gif" alt="gnome桌面1"></p>
+<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/pfKWLguNmi2YrtQ.png" srcset="/img/loading.gif" alt="gnome桌面1"></p>
 <p>大功告成啦！</p>
 
             </div>
