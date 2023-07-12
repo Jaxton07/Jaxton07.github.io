@@ -268,7 +268,7 @@ AppClassLoader：主要负责加载应用程序的主函数类</code></pre></div
 &#125;</code></pre></div>
 
 <p>其实这段代码已经很好的解释了双亲委派机制</p>
-<p><img src="https://pic.cloudfor.top/blog/20201217213314510.png" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="http://pic.cloudfor.top/blog/20201217213314510.png" srcset="/img/loading.gif" alt="img"></p>
 <h4 id="4-为什么要设计这种机制"><a href="#4-为什么要设计这种机制" class="headerlink" title="4.为什么要设计这种机制?"></a>4.为什么要设计这种机制?</h4><p>这种设计有个好处是，如果有人想替换系统级别的类：String.java。篡改它的实现，在这种机制下这些系统的类已经被Bootstrap classLoader加载过了（为什么？因为当一个类需要加载的时候，最先去尝试加载的就是BootstrapClassLoader），所以其他类加载器并没有机会再去加载，从一定程度上防止了危险代码的植入。</p>
 
             </div>

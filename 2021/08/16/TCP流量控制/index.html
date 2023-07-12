@@ -229,7 +229,7 @@
             <div class="markdown-body">
               <h1 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h1><p>又看了一遍《计算机网络-自顶向下方法》的传输层，感觉又有点模糊了，这里写下TCP流量控制的内容。</p>
 <h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><p>TCP流量控制和拥塞控制都是抑制发送方发送数据，但是它们是针对不同的原因采取的动作。那么为什么要进行流量控制呢？这个需要先了解TCP是怎么传输数据的，我们知道，TCP在两个客户端之间会维护一个缓冲池，从客户端A发送到客户端B的数据段会先发送到B的缓冲池，然后各个应用进程再从缓冲池里读取数据。</p>
-<p><img src="https://pic.cloudfor.top/blog/image-20210816180127309.png" srcset="/img/loading.gif" alt="image-20210816180127309"></p>
+<p><img src="http://pic.cloudfor.top/blog/image-20210816180127309.png" srcset="/img/loading.gif" alt="image-20210816180127309"></p>
 <h3 id="2、接收窗口"><a href="#2、接收窗口" class="headerlink" title="2、接收窗口"></a>2、接收窗口</h3><p>但是事情不会像我们想的那么完美的进行，客户端B可能有时候比较忙，可能不会那么及时的读取缓冲池里的数据，就像你给某人发消息，她/他可能要过一会儿才回你(doge)，可见世界的规律都是相通的。</p>
 <p>那么问题来了，客户端B来不及处理接收的数据，另一边客户端A还在接着发，那万一A发的太快了，B的接收缓冲池满了怎么办，也就是缓冲池溢出了，所以需要想办法控制，可以让A知道B的缓冲池还剩多少空间，如果满了就不再发了。</p>
 <p>于是TCP让发送方维护了一个接收窗口，表示接收方还有多少缓存空间，TCP又是全双工的，你可以给我发，我也可以给你发，所以两边都要维护一个接收窗口。</p>
@@ -246,7 +246,7 @@
 <div class="hljs"><pre><code class="hljs java">rwnd = RevBuffer - (LastByteReve  -  LastByteRead)</code></pre></div>
 
 <p>表示接收缓存还剩余的空间大小。这里直接用书里的一个图：</p>
-<p><img src="https://pic.cloudfor.top/blog/image-20210817100852476.png" srcset="/img/loading.gif" alt="image-20210817100852476"></p>
+<p><img src="http://pic.cloudfor.top/blog/image-20210817100852476.png" srcset="/img/loading.gif" alt="image-20210817100852476"></p>
 <p>那么具体的流量控制是怎么实现的呢？</p>
 <p>其实是在B发送给A的报文段中定义了一个接收窗口字段，B给A发送报文段的时候把 rwnd 的值填进去，这样A就知道B的接收缓存还有多少空间，开始时 rwnd = RevBuffer。然后随着A给B发送数据，rwnd 的值会动态变化，这就需要B要一直监控之前定义的那两个变量（LastByteReve，LastByteRead）。</p>
 <p>然后还不够，A也需要监控跟踪两个变量：LastByteSent 和 LastByteAcked</p>
