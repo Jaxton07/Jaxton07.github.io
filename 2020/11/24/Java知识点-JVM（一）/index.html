@@ -253,19 +253,19 @@
 <h3 id="2、垃圾回收算法"><a href="#2、垃圾回收算法" class="headerlink" title="2、垃圾回收算法"></a>2、垃圾回收算法</h3><p>主要有以下四种垃圾回收算法，</p>
 <h4 id="2-1-标记-清除算法（Mark-Sweep）"><a href="#2-1-标记-清除算法（Mark-Sweep）" class="headerlink" title="2.1 标记-清除算法（Mark-Sweep）"></a>2.1 标记-清除算法（Mark-Sweep）</h4><p>这是最基础的垃圾回收算法，最简单也最容易实现。主要分为两个阶段：标记阶段和清除阶段。标记阶段的任务是标记出所有需要被回收的对象，清除阶段就是回收被标记的对象所占空间。标记-清除算法的缺点就是回收之后的的内存区域比较分散，不连续。</p>
 <p>回收之前：</p>
-<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/pKHRyu2iWCbegds.png" srcset="/img/loading.gif" alt="标记清除"></p>
+<p><img src="https://pic.cloudfor.top/blog/pKHRyu2iWCbegds.png" srcset="/img/loading.gif" alt="标记清除"></p>
 <p>回收之后：</p>
-<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/dqhnBj679fcpwoJ.png" srcset="/img/loading.gif" alt="标记清除"></p>
+<p><img src="https://pic.cloudfor.top/blog/dqhnBj679fcpwoJ.png" srcset="/img/loading.gif" alt="标记清除"></p>
 <h4 id="2-2-复制算法（Copying）"><a href="#2-2-复制算法（Copying）" class="headerlink" title="2.2 复制算法（Copying）"></a>2.2 复制算法（Copying）</h4><p>为了解决标记-清除算法的缺陷，出现了复制算法，它将可用内存an容量划分为大小相等的两块，每次只使用其中的一块，当这一块的内存用完了，就讲还存活的对象复制到另一块上，然后再把当前这块使用的内存一次清理回收，这样就不会出现内存碎片的问题了。但是复制算法的缺点在于内存移动消耗太大。</p>
 <p>回收之前：</p>
-<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/OD1sL5a9khYWTHx.png" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://pic.cloudfor.top/blog/OD1sL5a9khYWTHx.png" srcset="/img/loading.gif" alt="img"></p>
 <p>回收之后：</p>
-<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/nUiAWTq3tEdyeGV.png" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://pic.cloudfor.top/blog/nUiAWTq3tEdyeGV.png" srcset="/img/loading.gif" alt="img"></p>
 <h4 id="2-3-标记-整理算法（Mark-Compact）"><a href="#2-3-标记-整理算法（Mark-Compact）" class="headerlink" title="2.3 标记-整理算法（Mark-Compact）"></a>2.3 标记-整理算法（Mark-Compact）</h4><p>为了解决复制算法的问题，提出了标记整理算法。它也是分为两个阶段，第一个阶段是标记，但是在标记完之后不是直接清理可回收对象，而是将存活对象都向一端移动，然后清理边界以外的内存。</p>
 <p>回收之前：</p>
-<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/lxdEhkTMJrDvVF5.png" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://pic.cloudfor.top/blog/lxdEhkTMJrDvVF5.png" srcset="/img/loading.gif" alt="img"></p>
 <p>回收之后：</p>
-<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/S2AOyRHvK8sVr6P.png" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="https://pic.cloudfor.top/blog/S2AOyRHvK8sVr6P.png" srcset="/img/loading.gif" alt="img"></p>
 <h4 id="2-4-分代收集（Generational-Collection）"><a href="#2-4-分代收集（Generational-Collection）" class="headerlink" title="2.4 分代收集（Generational Collection）"></a>2.4 分代收集（Generational Collection）</h4><p>分代收集是目前大部分JVM的垃圾回收器采用的算法。它是根据对象的生命周期不同划分为若干个不同的区域，一般分为老生代和新生代，老生代每次只有少量对象被回收，新生代则有大量对象被回收。这样就可以根据不同代的特点采取最合适的收集算法。新生代一般用复制算法，新生代又分为Eden区域和 from survivor、以及to survivor区域，他们默认占比是8:1:1，每次垃圾回收时，</p>
 <ol>
 <li>把Eden和from survivor中存活的对象放入 to survivor区；</li>
@@ -397,6 +397,28 @@
   
 
   
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">黔ICP备2023007338号</a>
+    
+      
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2023007338"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+          
+          <span>京公网安备12345678号</span>
+        </a>
+      
+    
+  </div>
+
 
   
 </footer>

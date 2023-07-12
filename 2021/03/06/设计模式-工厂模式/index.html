@@ -229,12 +229,12 @@
             <div class="markdown-body">
               <h1 id="设计模式-工厂模式"><a href="#设计模式-工厂模式" class="headerlink" title="设计模式-工厂模式"></a>设计模式-工厂模式</h1><p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27125796/answer/1615074467">https://www.zhihu.com/question/27125796/answer/1615074467</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/85624457">https://zhuanlan.zhihu.com/p/85624457</a></p>
-<h4 id="一、简单工厂"><a href="#一、简单工厂" class="headerlink" title="一、简单工厂"></a>一、简单工厂</h4><p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/20210306111616.png" srcset="/img/loading.gif"></p>
+<h4 id="一、简单工厂"><a href="#一、简单工厂" class="headerlink" title="一、简单工厂"></a>一、简单工厂</h4><p><img src="https://pic.cloudfor.top/blog/20210306111616.png" srcset="/img/loading.gif"></p>
 <p>简单工厂并没有在23种设计模式之中。</p>
 <p><strong>缺点：</strong></p>
 <p>简单工厂模式中的工厂是一个具体的类，而非接口或者抽象类，用switch-case 或者 if - else 来判断并返回对象实例。如果增加新的产品，就要增加新的 if-else, 这种方法扩展性比较差。违背了开闭原则，也影响了可读性。所以，这种方式使用在业务较简单，工厂类不会经常更改的情况。</p>
 <h4 id="二、工厂方法"><a href="#二、工厂方法" class="headerlink" title="二、工厂方法"></a>二、工厂方法</h4><p>为了解决上面提到的”增加if-else”的问题，可以为每一个产品子类建立一个对应的工厂子类，这些工厂子类实现同一个抽象工厂接口。这样，创建不同的产品，只需要实现不同的工厂子类。当有产品加入时，新建具体工厂继承抽象工厂，而不用修改任何一个类。</p>
-<p><img src="https://pic-1258892236.cos.ap-shanghai.myqcloud.com/c_img/image-20210313165601761.png" srcset="/img/loading.gif" alt="image-20210313165601761"></p>
+<p><img src="https://pic.cloudfor.top/blog/image-20210313165601761.png" srcset="/img/loading.gif" alt="image-20210313165601761"></p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">// 苹果工厂</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppleFactory</span> </span>&#123;
     <span class="hljs-function"><span class="hljs-keyword">public</span> Fruit <span class="hljs-title">create</span><span class="hljs-params">()</span></span>&#123;
@@ -468,6 +468,28 @@
   
 
   
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">黔ICP备2023007338号</a>
+    
+      
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2023007338"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+          
+          <span>京公网安备12345678号</span>
+        </a>
+      
+    
+  </div>
+
 
   
 </footer>
