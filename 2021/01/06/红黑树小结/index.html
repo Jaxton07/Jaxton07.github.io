@@ -230,11 +230,11 @@
               <h1 id="红黑树小结"><a href="#红黑树小结" class="headerlink" title="红黑树小结"></a>红黑树小结</h1><p>[部分摘抄自敖丙的文章<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/312327402">https://www.zhihu.com/question/312327402</a> ]另一篇 ：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95892351">https://zhuanlan.zhihu.com/p/95892351</a> 两篇都有遗漏的地方，结合起来差不多。</p>
 <p>红黑树和2-3-4 树是一个套路，可以互相转化。</p>
 <h4 id="2-3-4树"><a href="#2-3-4树" class="headerlink" title="2-3-4树"></a>2-3-4树</h4><p>2-3-4树是<strong>阶数</strong>为4的B树，B树，全名BalanceTree，平衡树。这种结构主要用来做查找。关于2-3-4树插入和删除另外专门写一篇总结下，对 2-3 树来说，大体就是2节点插入会优先变3节点，3节点会临时变 4 节点，然后4节点变成一个父节点带两个子节点。</p>
-<p><img src="http://pic.cloudfor.top/blog/image-20210113110205366.png" srcset="/img/loading.gif" alt="image-20210113110205366"></p>
+<p><img src="https://pic.cloudfor.top/blog/image-20210113110205366.png" srcset="/img/loading.gif" alt="image-20210113110205366"></p>
 <h4 id="2-3-4树到红黑树的转化"><a href="#2-3-4树到红黑树的转化" class="headerlink" title="2-3-4树到红黑树的转化"></a>2-3-4树到红黑树的转化</h4><p>总的来说，红黑树是对概念模型2-3-4树的一种实现，由于直接进行不同节点间的转化会造成较大的开销，所以选择以二叉树为基础，在二叉树的属性中加入一个<strong>颜色属性</strong>来表示2-3-4树中不同的节点。</p>
 <p>2-3-4树中的2节点对应着红黑树中的黑色节点，而2-3-4树中的非2节点是以<strong>红节点+黑节点</strong>的方式存在，红节点的意义是与黑色父节点结合，表达着2-3-4树中的3，4节点。</p>
-<p><img src="http://pic.cloudfor.top/blog/image-20210113110701595.png" srcset="/img/loading.gif" alt="image-20210113110701595"></p>
-<h5 id="整棵树的转化："><a href="#整棵树的转化：" class="headerlink" title="整棵树的转化："></a>整棵树的转化：</h5><p><img src="http://pic.cloudfor.top/blog/image-20210113110939314.png" srcset="/img/loading.gif" alt="image-20210113110939314"></p>
+<p><img src="https://pic.cloudfor.top/blog/image-20210113110701595.png" srcset="/img/loading.gif" alt="image-20210113110701595"></p>
+<h5 id="整棵树的转化："><a href="#整棵树的转化：" class="headerlink" title="整棵树的转化："></a>整棵树的转化：</h5><p><img src="https://pic.cloudfor.top/blog/image-20210113110939314.png" srcset="/img/loading.gif" alt="image-20210113110939314"></p>
 <h3 id="红黑树的特性"><a href="#红黑树的特性" class="headerlink" title="红黑树的特性"></a>红黑树的特性</h3><p>1、每个节点，要么是黑色，要么是红色</p>
 <p>2、根节点是黑色</p>
 <p>3、每个叶子结点都是黑色的空结点 （NIL节点）</p>
